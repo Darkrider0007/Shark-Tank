@@ -7,7 +7,7 @@ import { MdAlternateEmail } from "react-icons/md";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { BsShieldLockFill } from "react-icons/bs";
 
-const page = () => {
+const Page = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [values, setValues] = useState({
     name: "",
@@ -157,4 +157,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
