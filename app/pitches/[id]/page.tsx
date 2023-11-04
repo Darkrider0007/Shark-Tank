@@ -4,7 +4,7 @@ import PitchDetail from "@/components/PitchDetail";
 import AddOffer from "@/components/AddOffer";
 import OfferCard from "@/components/OfferCard";
 
-const page = () => {
+const Page = () => {
   return (
     <div className="min-h-screen w-full bg-bg_dark_primary flex flex-col justify-start items-center gap-3">
       <Navbar />
@@ -26,4 +26,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

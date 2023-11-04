@@ -5,7 +5,7 @@ import MenuIcon from "./MenuIcon";
 
 const Navbar = () => {
   return (
-    <div className="w-full px-5 py-2 flex justify-between items-center bg-bg_dark_secondary shadow-md">
+    <div className="w-full px-5 py-2 flex justify-between items-center bg-bg_dark_secondary text-white shadow-md">
       <Link href="/">
         <Image
           src="/STlogo2.png"
@@ -14,6 +14,9 @@ const Navbar = () => {
           width={50}
           className="object-cover"
         />
+      </Link>
+      <Link href="/login">
+        Login
       </Link>
       <MenuIcon theme="dark" />
     </div>
