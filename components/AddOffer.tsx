@@ -68,10 +68,10 @@ const AddOffer = () => {
       <div className="flex justify-start items-center w-full mt-5">
         <input
           type="checkbox"
-          onClick={() => {
+          checked={isPrivate}
+          onChange={() => {
             setIsPrivate(!isPrivate);
           }}
-          checked={isPrivate}
         />
         <p className="ml-3">
           Keep Your Comment Private Between You and Peacher
