@@ -1,15 +1,23 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 type MenuIconProps = {
   theme: string;
+  isActive?: boolean;
 };
 
-const MenuIcon = ({ theme }: MenuIconProps) => {
+const MenuIcon = ({ theme, isActive }: MenuIconProps) => {
+  const path = usePathname();
   const [showMenu, setShowMenu] = useState(false);
+  useEffect(() => {
+    setShowMenu(false);
+  }, [path]);
   return (
     <div
-      className="relative h-[25px] w-[25px] flex flex-col justify-between items-center cursor-pointer overflow-hidden"
+      className={`relative h-[25px] w-[25px] flex flex-col justify-between items-center cursor-pointer overflow-hidden ${
+        isActive ? "z-[11]" : "z-10 delay-500"
+      }`}
       onClick={() => {
         setShowMenu(!showMenu);
       }}
