@@ -7,13 +7,16 @@ import { MdAlternateEmail } from "react-icons/md";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { BsShieldLockFill } from "react-icons/bs";
 import { useForm } from "react-hook-form";
-import  authService  from "../appwrite/auth"
-import { useRouter } from 'next/navigation'
+import authService from "../appwrite/auth";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { login as authLogin } from "../GlobalRedux/Features/authSlice";
 
 const Page = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
-  const router = useRouter()
+  const router = useRouter();
+  const dispatch = useDispatch();
   // const [values, setValues] = useState({
   //   name: "",
   //   email: "",
@@ -21,7 +24,6 @@ const Page = () => {
   //   confirmPassword: "",
   //   role: "Entrepreneur",
   // });
-
 
   const { register, handleSubmit } = useForm();
 
@@ -40,12 +42,12 @@ const Page = () => {
   // };
 
   // --------------------- Function For Doing Sign Up ---------------------
-  const handleSignUp = async (data:any) => {
+  const handleSignUp = async (data: any) => {
     setError("");
     //console.log(data);
-    const { name, email, password, confirmPassword, role } = data;
+    const { name, email, password, confirmPassword } = data;
 
-    if (!name || !email || !password || !confirmPassword || !role) {
+    if (!name || !email || !password || !confirmPassword) {
       setError("Please fill all the fields");
       return;
     }
@@ -61,15 +63,19 @@ const Page = () => {
     }
     try {
       console.log("here");
-      const userData = await authService.createAccount({email,password,name,role})
-            if (userData) {
-                router.push('/login')
-            }
-    } catch (error:any) {
+      const userData = await authService.createAccount({
+        email,
+        password,
+        name,
+      });
+      if (userData) {
+        const data = await authService.getCurrentUser();
+        dispatch(authLogin(data));
+        router.push("/");
+      }
+    } catch (error: any) {
       setError(error.message || "An error occurred");
     }
-    
-
   };
 
   return (
@@ -94,12 +100,11 @@ const Page = () => {
           {/* <p className="mt-2 text-lg">See which shark is waiting for you</p> */}
         </div>
 
-
         {error && <p className="text-red-500">{error}</p>}
         {/* -----------------Form Starts Here----------------- */}
 
-
-        <form className="flex flex-col justify-start items-start w-full mt-4"
+        <form
+          className="flex flex-col justify-start items-start w-full mt-4"
           onSubmit={handleSubmit(handleSignUp)}
         >
           <div className="flex flex-col justify-between items-start mb-4 w-full">
@@ -109,8 +114,8 @@ const Page = () => {
                 type="text"
                 placeholder="Enter Your Full Name"
                 className="bg-transparent focus:outline-none w-full"
-                {...register("name",{
-                  required: true
+                {...register("name", {
+                  required: true,
                 })}
               />
               <FaUserCircle className="text-xl ml-2" />
@@ -123,12 +128,14 @@ const Page = () => {
                 type="email"
                 placeholder="Enter Your Email"
                 className="bg-transparent focus:outline-none w-full"
-                {...register("email",{
+                {...register("email", {
                   required: true,
                   validate: {
-                    matchPatern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
-                    "Email address must be a valid address",
-                }
+                    matchPatern: (value) =>
+                      /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(
+                        value
+                      ) || "Email address must be a valid address",
+                  },
                 })}
               />
               <MdAlternateEmail className="text-xl ml-2" />
@@ -141,10 +148,9 @@ const Page = () => {
                 type={`${showPassword ? "text" : "password"}`}
                 placeholder="Enter Your Password"
                 className="bg-transparent focus:outline-none w-full"
-                {...register("password",{
+                {...register("password", {
                   required: true,
-                })
-                }
+                })}
               />
               {showPassword ? (
                 <AiFillEyeInvisible
@@ -166,10 +172,9 @@ const Page = () => {
                 type="password"
                 placeholder="Re-Enter Your Password"
                 className="bg-transparent focus:outline-none w-full"
-                {...register("confirmPassword",{
-                    required: true,
-                  })
-                }
+                {...register("confirmPassword", {
+                  required: true,
+                })}
               />
               <BsShieldLockFill className="text-xl ml-2" />
             </div>
@@ -191,14 +196,13 @@ const Page = () => {
               </option>
             </select> */}
           {/* </div> */}
-            <button
+          <button
             type="submit"
             className="px-3 py-1.5 border border-[#fefefe] mt-4 hover:bg-[#fefefe] hover:text-black transition-all"
           >
             Sign Up
           </button>
         </form>
-        
       </div>
     </div>
   );
