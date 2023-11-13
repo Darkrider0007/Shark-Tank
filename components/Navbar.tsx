@@ -10,7 +10,7 @@ const Navbar = () => {
   const path = usePathname();
   const [isActive, setIsActive] = useState(false);
 
-  const authStatus = useSelector(state => state.auth.status);
+  const authStatus = useSelector((state: { auth: { status: boolean } }) => state.auth.status);
 
   useEffect(() => {
     setIsActive(false);
