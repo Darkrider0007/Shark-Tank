@@ -174,7 +174,7 @@ const Page = () => {
               <BsShieldLockFill className="text-xl ml-2" />
             </div>
           </div>
-          <div className="flex flex-col justify-between items-start mb-4 w-full">
+          {/* <div className="flex flex-col justify-between items-start mb-4 w-full">
             <p>Role</p>
             <select
               className="w-full p-2 bg-transparent border border-[#945353] mt-1 focus:outline-none"
@@ -189,8 +189,8 @@ const Page = () => {
               <option value="Investor" className="text-black">
                 Investor
               </option>
-            </select>
-          </div>
+            </select> */}
+          {/* </div> */}
             <button
             type="submit"
             className="px-3 py-1.5 border border-[#fefefe] mt-4 hover:bg-[#fefefe] hover:text-black transition-all"

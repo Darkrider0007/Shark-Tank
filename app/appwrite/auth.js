@@ -1,30 +1,50 @@
-import { Account, Client, ID } from "appwrite";
+import { Account, Client, Databases, ID, Permission, Role } from "appwrite";
 import conf from "../conf/conf";
 
 export class AppwriteAuth {
     client = new Client();
     account ;
+    databases ;
     constructor() {
         this.client
             .setEndpoint(conf.appwriteUrl)
             .setProject(conf.appwriteProjectId);
         this.account = new Account(this.client);    
+        this.databases = new Databases(this.client);
+    }
+
+    async createUserDatabase({UserId,role}){
+        console.log(UserId,role);
+        console.log(conf.appwriteUserDatabaseID,conf.appwriteUserCollectionID);
+        try {
+            return await this.databases.createDocument(
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId,
+                ID.unique(),
+                {
+                    UserId,
+                    role
+                }
+            )
+        } catch (error) {
+            console.log(`Appwrite Create User Database Error: ${error}`);
+        }
     }
 
     async createAccount({email, password, name, role}) {
-        console.log(`Appwrite Create Account: ${email} ${password} ${name} ${role}`);
-        console.log(`Appwrite Create Account: ${conf.appwriteUrl} ${conf.appwriteProjectId}`);
-        console.log(conf);
         try {
-            const userAccount = await this.account.create(ID.unique(), email, password, name);
-            if (userAccount) {
-                // call another method
-                return this.login({email, password});
-            } else {
-               return  userAccount;
+            const userAccount  = await this.account.create(ID.unique(),email, password, name);
+            if(userAccount){
+                const login =  this.login({email, password });
+            
+                if(login){
+                return await this.createUserDatabase({UserId:userAccount.$id,role});
+            }
+            }else{
+                return userAccount;
             }
         } catch (error) {
-            throw error;
+            console.log(`Appwrite Create Account Error: ${error}`);
         }
     }
 

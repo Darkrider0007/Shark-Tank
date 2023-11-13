@@ -6,13 +6,20 @@ import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { MdAlternateEmail } from "react-icons/md";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import authService from "../appwrite/auth";
 
 const Page = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
+  const router = useRouter()
   const [values, setValues] = useState({
     email: "",
     password: "",
   });
+
+  const { register, handleSubmit } = useForm();
 
   // ---------------------- Function For Showing Password -----------------------
   const handleShowPassword = () => {
@@ -20,13 +27,29 @@ const Page = () => {
   };
 
   // ---------------------- Function For Updating Values For Input Fields -----------------------
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-  };
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setValues({ ...values, [e.target.name]: e.target.value });
+  // };
 
-  // --------------------- Function For Doing Sign Up ---------------------
-  const handleSignUp = async () => {
-    // TODO: Implement
+  // --------------------- Function For Doing Sign IN ---------------------
+  const handleSignIn = async (data:any) => {
+    setError("");
+    console.log(data);
+    const { email, password } = data;
+    if ( !email || !password) {
+      setError("Please fill all the fields");
+      return;
+    }
+    try {
+      console.log("here");
+      const userData = await authService.login({email,password})
+            if (userData) {
+                router.push('/')
+            }
+    } catch (error:any) {
+      setError(error.message || "An error occurred");
+    }   
+
   };
 
   return (
@@ -63,18 +86,27 @@ const Page = () => {
           <p className="max-sm:text-[11px] text-[14px]">Or with email and password</p>
           <hr className="bg-white h-[1px] w-[20%] max-sm:w-[20%]" />
         </div> */}
-        <form className="flex flex-col justify-start items-start w-full mt-2">
+
+        {error && <p className="text-red-500">{error}</p>}
+        {/* -----------------Form Starts Here----------------- */}
+
+        <form className="flex flex-col justify-start items-start w-full mt-2"
+          onSubmit={handleSubmit(handleSignIn)}
+        >
           <div className="flex flex-col justify-between items-start mb-4 w-full">
             <p>Email</p>
             <div className="flex justify-between items-center w-full p-2 bg-transparent border border-[#fefefe] mt-1">
               <input
                 type="email"
-                name="email"
                 placeholder="Enter Your Email"
                 className="bg-transparent focus:outline-none w-full"
-                value={values.email}
-                onChange={handleChange}
-                required
+                {...register("email",{
+                  required: true,
+                  validate: {
+                    matchPatern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
+                    "Email address must be a valid address",
+                }
+                })}
               />
               <MdAlternateEmail className="text-xl ml-2" />
             </div>
@@ -84,12 +116,12 @@ const Page = () => {
             <div className="flex justify-between items-center w-full p-2 bg-transparent border border-[#fefefe] mt-1">
               <input
                 type={`${showPassword ? "text" : "password"}`}
-                name="password"
                 placeholder="Enter Your Password"
                 className="bg-transparent focus:outline-none w-full"
-                value={values.password}
-                onChange={handleChange}
-                required
+                {...register("password",{
+                  required: true,
+                })
+                }
               />
               {showPassword ? (
                 <AiFillEyeInvisible
@@ -104,14 +136,14 @@ const Page = () => {
               )}
             </div>
           </div>
-        </form>
-        <button
+          <button
           type="submit"
           className="px-3 py-1.5 border border-[#fefefe] mt-4"
-          onClick={handleSignUp}
         >
           Sign In
         </button>
+        </form>
+        
       </div>
     </div>
   );
