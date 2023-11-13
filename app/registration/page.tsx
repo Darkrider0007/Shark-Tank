@@ -1,21 +1,29 @@
 "use client";
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaUserCircle } from "react-icons/fa";
 import { MdAlternateEmail } from "react-icons/md";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { BsShieldLockFill } from "react-icons/bs";
+import { useForm } from "react-hook-form";
+import  authService  from "../appwrite/auth"
+import { useRouter } from 'next/navigation'
 
 const Page = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [values, setValues] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    role: "Entrepreneur",
-  });
+  const [error, setError] = useState("");
+  const router = useRouter()
+  // const [values, setValues] = useState({
+  //   name: "",
+  //   email: "",
+  //   password: "",
+  //   confirmPassword: "",
+  //   role: "Entrepreneur",
+  // });
+
+
+  const { register, handleSubmit } = useForm();
 
   // ---------------------- Function For Showing Password -----------------------
   const handleShowPassword = () => {
@@ -23,17 +31,45 @@ const Page = () => {
   };
 
   // ---------------------- Function For Updating Values For Input Fields -----------------------
-  const handleChange = (
-    e:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-  };
+  // const handleChange = (
+  //   e:
+  //     | React.ChangeEvent<HTMLInputElement>
+  //     | React.ChangeEvent<HTMLSelectElement>
+  // ) => {
+  //   setValues({ ...values, [e.target.name]: e.target.value });
+  // };
 
   // --------------------- Function For Doing Sign Up ---------------------
-  const handleSignUp = async () => {
-    // TODO: Implement
+  const handleSignUp = async (data:any) => {
+    setError("");
+    //console.log(data);
+    const { name, email, password, confirmPassword, role } = data;
+
+    if (!name || !email || !password || !confirmPassword || !role) {
+      setError("Please fill all the fields");
+      return;
+    }
+
+    if (password.length < 8) {
+      setError("Password must be at least 8 characters");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+    try {
+      console.log("here");
+      const userData = await authService.createAccount({email,password,name,role})
+            if (userData) {
+                router.push('/login')
+            }
+    } catch (error:any) {
+      setError(error.message || "An error occurred");
+    }
+    
+
   };
 
   return (
@@ -57,18 +93,25 @@ const Page = () => {
           </p>
           {/* <p className="mt-2 text-lg">See which shark is waiting for you</p> */}
         </div>
-        <form className="flex flex-col justify-start items-start w-full mt-4">
+
+
+        {error && <p className="text-red-500">{error}</p>}
+        {/* -----------------Form Starts Here----------------- */}
+
+
+        <form className="flex flex-col justify-start items-start w-full mt-4"
+          onSubmit={handleSubmit(handleSignUp)}
+        >
           <div className="flex flex-col justify-between items-start mb-4 w-full">
             <p>Full Name</p>
             <div className="flex justify-between items-center w-full p-2 bg-transparent border border-[#fefefe] mt-1">
               <input
                 type="text"
-                name="name"
                 placeholder="Enter Your Full Name"
                 className="bg-transparent focus:outline-none w-full"
-                value={values.name}
-                onChange={handleChange}
-                required
+                {...register("name",{
+                  required: true
+                })}
               />
               <FaUserCircle className="text-xl ml-2" />
             </div>
@@ -78,12 +121,15 @@ const Page = () => {
             <div className="flex justify-between items-center w-full p-2 bg-transparent border border-[#fefefe] mt-1">
               <input
                 type="email"
-                name="email"
                 placeholder="Enter Your Email"
                 className="bg-transparent focus:outline-none w-full"
-                value={values.email}
-                onChange={handleChange}
-                required
+                {...register("email",{
+                  required: true,
+                  validate: {
+                    matchPatern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
+                    "Email address must be a valid address",
+                }
+                })}
               />
               <MdAlternateEmail className="text-xl ml-2" />
             </div>
@@ -93,12 +139,12 @@ const Page = () => {
             <div className="flex justify-between items-center w-full p-2 bg-transparent border border-[#fefefe] mt-1">
               <input
                 type={`${showPassword ? "text" : "password"}`}
-                name="password"
                 placeholder="Enter Your Password"
                 className="bg-transparent focus:outline-none w-full"
-                value={values.password}
-                onChange={handleChange}
-                required
+                {...register("password",{
+                  required: true,
+                })
+                }
               />
               {showPassword ? (
                 <AiFillEyeInvisible
@@ -118,12 +164,12 @@ const Page = () => {
             <div className="flex justify-between items-center w-full p-2 bg-transparent border border-[#fefefe] mt-1">
               <input
                 type="password"
-                name="confirmPassword"
                 placeholder="Re-Enter Your Password"
                 className="bg-transparent focus:outline-none w-full"
-                value={values.confirmPassword}
-                onChange={handleChange}
-                required
+                {...register("confirmPassword",{
+                    required: true,
+                  })
+                }
               />
               <BsShieldLockFill className="text-xl ml-2" />
             </div>
@@ -132,9 +178,10 @@ const Page = () => {
             <p>Role</p>
             <select
               className="w-full p-2 bg-transparent border border-[#945353] mt-1 focus:outline-none"
-              value={values.role}
-              onChange={handleChange}
-              name="role"
+              {...register("role",{
+                required: true
+              })
+              }
             >
               <option value="Entrepreneur" className="text-black">
                 Entrepreneur
@@ -144,14 +191,14 @@ const Page = () => {
               </option>
             </select>
           </div>
+            <button
+            type="submit"
+            className="px-3 py-1.5 border border-[#fefefe] mt-4 hover:bg-[#fefefe] hover:text-black transition-all"
+          >
+            Sign Up
+          </button>
         </form>
-        <button
-          type="submit"
-          className="px-3 py-1.5 border border-[#fefefe] mt-4"
-          onClick={handleSignUp}
-        >
-          Sign Up
-        </button>
+        
       </div>
     </div>
   );

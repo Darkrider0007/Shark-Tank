@@ -12,19 +12,19 @@ export class AppwriteAuth {
     }
 
     async createAccount({email, password, name, role}) {
+        console.log(`Appwrite Create Account: ${email} ${password} ${name} ${role}`);
+        console.log(`Appwrite Create Account: ${conf.appwriteUrl} ${conf.appwriteProjectId}`);
+        console.log(conf);
         try {
-            const userAccount  = await this.account.create(ID.unique(),email, password, name);
-
-            if(userAccount){
-                if (role) {
-                    await this.account.update(userAccount.$id, { role });
-                }
-                return this.login({email, password });
-            }else{
-                return userAccount;
+            const userAccount = await this.account.create(ID.unique(), email, password, name);
+            if (userAccount) {
+                // call another method
+                return this.login({email, password});
+            } else {
+               return  userAccount;
             }
         } catch (error) {
-            console.log(`Appwrite Create Account Error: ${error}`);
+            throw error;
         }
     }
 
