@@ -25,7 +25,7 @@ const AddOffer = () => {
       <form className="flex flex-col justify-between items-start w-full">
         <div className="flex flex-col justify-start items-start w-full mt-2">
           <p>Amount</p>
-          <div className="w-full flex justify-between items-center border border-white px-2 py-1 mt-1">
+          <div className="w-full flex justify-between items-center bg-bg_dark_placeholder px-2 py-1 mt-1">
             <input
               type="number"
               name="amount"
@@ -40,7 +40,7 @@ const AddOffer = () => {
         </div>
         <div className="flex flex-col justify-start items-start w-full mt-2">
           <p>Equity</p>
-          <div className="w-full flex justify-between items-center border border-white px-2 py-1 mt-1">
+          <div className="w-full flex justify-between items-center bg-bg_dark_placeholder px-2 py-1 mt-1">
             <input
               type="number"
               name="equity"
@@ -57,7 +57,7 @@ const AddOffer = () => {
           <p>Comment</p>
           <textarea
             name="comment"
-            className="w-full min-h-[105px] rounded-sm focus:outline-none bg-transparent border border-white px-2 py-1 mt-1 resize-none"
+            className="w-full min-h-[105px] rounded-sm focus:outline-none bg-transparent bg-bg_dark_placeholder px-2 py-1 mt-1 resize-none"
             required
             value={values.comment}
             onChange={handleChange}
@@ -79,7 +79,7 @@ const AddOffer = () => {
       </div>
       <button
         type="submit"
-        className="px-3 py-1.5 bg-transparent border border-white mt-3"
+        className="px-3 py-1.5 bg-transparent bg-bg_dark_placeholder mt-3"
         onClick={handleSubmit}
       >
         Add Offer

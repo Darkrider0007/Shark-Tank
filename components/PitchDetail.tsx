@@ -16,7 +16,7 @@ const PitchDetail = () => {
         <div className="flex flex-col min-h-1/2 w-1/2 gap-3">
           <div className="flex flex-col justify-start items-start">
             <p>Equity</p>
-            <div className="flex justify-between items-center w-full px-2 py-1 mt-1 border border-white rounded-sm">
+            <div className="flex justify-between items-center w-full px-2 py-1 mt-1 rounded-sm bg-bg_dark_placeholder">
               <input
                 type="text"
                 readOnly
@@ -28,7 +28,7 @@ const PitchDetail = () => {
           </div>
           <div className="flex flex-col justify-start items-start">
             <p>Ask Amount</p>
-            <div className="flex justify-between items-center w-full px-2 py-1 mt-1 border border-white rounded-sm">
+            <div className="flex justify-between items-center w-full px-2 py-1 mt-1 rounded-sm bg-bg_dark_placeholder">
               <input
                 type="text"
                 readOnly
@@ -44,7 +44,7 @@ const PitchDetail = () => {
               type="text"
               readOnly
               value="Lorem Ispum"
-              className="w-full px-2 py-1 mt-1 rounded-sm focus:outline-none bg-transparent border border-white"
+              className="w-full px-2 py-1 mt-1 rounded-sm focus:outline-none bg-transparent bg-bg_dark_placeholder"
             />
           </div>
         </div>
@@ -52,7 +52,7 @@ const PitchDetail = () => {
       <div className="flex flex-col justify-start items-start mt-3 w-full h-1/2">
         <p>Pitch Description</p>
         <textarea
-          className="w-full p-2 h-[150px] rounded-sm mt-1 resize-none bg-transparent border border-white focus:outline-none"
+          className="w-full p-2 h-[150px] rounded-sm mt-1 resize-none bg-transparent bg-bg_dark_placeholder focus:outline-none"
           value="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque magna nibh, scelerisque id dolor eget, laoreet imperdiet odio. Nullam cursus metus quis dolor malesuada maximus. Suspendisse potenti. Pellentesque bibendum egestas sem, non porttitor felis tempus in. In ultrices, felis et mollis placerat, felis massa pellentesque tortor"
           readOnly
         />

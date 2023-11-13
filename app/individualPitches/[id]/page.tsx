@@ -7,8 +7,8 @@ import OfferCard from "@/components/OfferCard";
 const Page = () => {
   return (
     <div className="min-h-screen w-full bg-bg_dark_primary flex flex-col justify-start items-center gap-3">
-      <Navbar />
-      <div className="min-h-[40vh] w-full flex justify-between items-start px-2 gap-2 max-sm:flex-col">
+      {/* <Navbar /> */}
+      <div className="min-h-[40vh] w-full flex justify-between items-start px-2 gap-2 max-sm:flex-col mt-2">
         <PitchDetail />
         <AddOffer />
       </div>
