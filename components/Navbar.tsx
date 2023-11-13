@@ -1,14 +1,17 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, use } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import MenuIcon from "./MenuIcon";
-
+import Logout from "./Logout";
+import { useSelector } from "react-redux";
 const Navbar = () => {
   const path = usePathname();
-  const [loggedin, setLoggedin] = useState(false);
   const [isActive, setIsActive] = useState(false);
+
+  const authStatus = useSelector(state => state.auth.status);
+
   useEffect(() => {
     setIsActive(false);
   }, [path]);
@@ -39,8 +42,8 @@ const Navbar = () => {
           <Link href="/pitches" className="hover:underline">
             Pitches
           </Link>
-          {loggedin ? (
-            <h1>User</h1>
+          {authStatus ? (
+              <Logout/>
           ) : (
             <Link href="/login" className="hover:underline ">
               Login

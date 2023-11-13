@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import GlobalReduxProvider from "./GlobalRedux/provider";
+import  GlobalReduxProvider  from "./GlobalRedux/provider";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -23,9 +23,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${poppins.className} overflow-x-hidden`}>
         <GlobalReduxProvider>
-          <Navbar />
-          {children}
-        </GlobalReduxProvider>        
+        <Navbar />
+        {children}
+        </GlobalReduxProvider>
       </body>
     </html>
   );

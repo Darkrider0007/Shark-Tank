@@ -9,16 +9,18 @@ import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import authService from "../appwrite/auth";
+import { useDispatch } from "react-redux";
+import { login as authLogin } from "../GlobalRedux/Features/authSlice";
 
 const Page = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter()
-  const [values, setValues] = useState({
-    email: "",
-    password: "",
-  });
-
+  // const [values, setValues] = useState({
+  //   email: "",
+  //   password: "",
+  // });
+  const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
 
   // ---------------------- Function For Showing Password -----------------------
@@ -34,17 +36,17 @@ const Page = () => {
   // --------------------- Function For Doing Sign IN ---------------------
   const handleSignIn = async (data:any) => {
     setError("");
-    console.log(data);
     const { email, password } = data;
     if ( !email || !password) {
       setError("Please fill all the fields");
       return;
     }
     try {
-      console.log("here");
-      const userData = await authService.login({email,password})
-            if (userData) {
-                router.push('/')
+      const session  = await authService.login({email,password})
+            if (session) {
+              const userData = await authService.getCurrentUser()
+              if(userData) dispatch(authLogin(userData));
+              router.push('/')
             }
     } catch (error:any) {
       setError(error.message || "An error occurred");
