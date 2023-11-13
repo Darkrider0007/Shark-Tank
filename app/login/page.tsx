@@ -50,7 +50,7 @@ const Page = () => {
           </p>
           {/* <p className="mt-2 text-lg">See which shark is waiting for you</p> */}
         </div>
-        <div className="flex w-full justify-between items-center my-4 gap-2 text-lg">
+        {/* <div className="flex w-full justify-between items-center my-4 gap-2 text-lg">
           <button className="flex justify-center items-center w-1/2 h-[40px] rounded-md border-white border">
             <FcGoogle />
           </button>
@@ -62,7 +62,7 @@ const Page = () => {
           <hr className="bg-white h-[1px] w-[20%] max-sm:w-[20%]" />
           <p className="max-sm:text-[11px] text-[14px]">Or with email and password</p>
           <hr className="bg-white h-[1px] w-[20%] max-sm:w-[20%]" />
-        </div>
+        </div> */}
         <form className="flex flex-col justify-start items-start w-full mt-2">
           <div className="flex flex-col justify-between items-start mb-4 w-full">
             <p>Email</p>
