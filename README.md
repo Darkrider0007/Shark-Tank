@@ -47,7 +47,6 @@ NEXT_PUBLIC_EMAILJS_TEMPLATE_ID = ""
 npm run dev
 ```
 
-Feel free to explore and contribute to the Shark Tank project! 🚀
 
 # License
 
