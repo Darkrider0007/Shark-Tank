@@ -28,9 +28,9 @@ export default function Home() {
             entrepreneurs to showcase their innovations but has also entertained
             and inspired millions of viewers around the world.
           </p>
-          <button className="mt-6 rounded-full border-white border-2 px-4 py-2 hover:underline hover:border-b-4">
+          <Link href='/about' className="mt-6 rounded-full border-white border-2 px-4 py-2 hover:underline hover:border-b-4">
             See more →
-          </button>
+          </Link>
         </div>
       </div>
     </>

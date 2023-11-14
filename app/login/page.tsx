@@ -11,8 +11,11 @@ import { useRouter } from "next/navigation";
 import authService from "../appwrite/auth";
 import { useDispatch } from "react-redux";
 import { login as authLogin } from "../GlobalRedux/Features/authSlice";
+import { AddPageLoader, SubmitButton } from "@/components";
+
 
 const Page = () => {
+  const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter()
@@ -42,17 +45,24 @@ const Page = () => {
       return;
     }
     try {
+      setLoading(true);
       const session  = await authService.login({email,password})
-            if (session) {
-              const userData = await authService.getCurrentUser()
-              if(userData) dispatch(authLogin(userData));
-              router.push('/')
-            }
+      if (session) {
+        const userData = await authService.getCurrentUser()
+        if(userData) dispatch(authLogin(userData));
+        router.push('/')
+      }
     } catch (error:any) {
+      setLoading(false);
       setError(error.message || "An error occurred");
-    }   
-
+    }
   };
+
+  if(loading){
+    return(
+      <AddPageLoader/>
+    )
+  }
 
   return (
     <div className="min-h-screen w-full bg-bg_dark_primary flex justify-start items-start text-[#fefefe]">
@@ -68,7 +78,7 @@ const Page = () => {
           <h1 className="text-3xl font-bold">Sign In Into SharkTank</h1>
           <p className="mt-1">
             Don&apos;s have an account?{" "}
-            <Link href="/registration" className="text-blue-500">
+            <Link href="/registration" className="text-blue-500 hover:underline">
               Sign Up
             </Link>{" "}
             Here
@@ -138,12 +148,7 @@ const Page = () => {
               )}
             </div>
           </div>
-          <button
-          type="submit"
-          className="px-3 py-1.5 border border-[#fefefe] mt-4"
-        >
-          Sign In
-        </button>
+          <SubmitButton props="Login"/>
         </form>
         
       </div>

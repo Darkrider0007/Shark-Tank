@@ -11,19 +11,15 @@ import authService from "../appwrite/auth";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { login as authLogin } from "../GlobalRedux/Features/authSlice";
+import { AddPageLoader, SubmitButton } from "@/components";
+
 
 const Page = () => {
+  const [loading, setLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
   const dispatch = useDispatch();
-  // const [values, setValues] = useState({
-  //   name: "",
-  //   email: "",
-  //   password: "",
-  //   confirmPassword: "",
-  //   role: "Entrepreneur",
-  // });
 
   const { register, handleSubmit } = useForm();
 
@@ -32,16 +28,8 @@ const Page = () => {
     setShowPassword(!showPassword);
   };
 
-  // ---------------------- Function For Updating Values For Input Fields -----------------------
-  // const handleChange = (
-  //   e:
-  //     | React.ChangeEvent<HTMLInputElement>
-  //     | React.ChangeEvent<HTMLSelectElement>
-  // ) => {
-  //   setValues({ ...values, [e.target.name]: e.target.value });
-  // };
+  // ---------------------- Function Handling SignUP -----------------------
 
-  // --------------------- Function For Doing Sign Up ---------------------
   const handleSignUp = async (data: any) => {
     setError("");
     //console.log(data);
@@ -62,7 +50,7 @@ const Page = () => {
       return;
     }
     try {
-      console.log("here");
+      setLoading(true);
       const userData = await authService.createAccount({
         email,
         password,
@@ -74,9 +62,16 @@ const Page = () => {
         router.push("/");
       }
     } catch (error: any) {
+      setLoading(false);
       setError(error.message || "An error occurred");
     }
   };
+
+  if(loading){
+    return(
+      <AddPageLoader prop="Holding Up"/>
+    )    
+  }
 
   return (
     <div className="min-h-screen w-full bg-bg_dark_primary flex justify-end items-start text-[#fefefe]">
@@ -92,7 +87,7 @@ const Page = () => {
           <h1 className="text-3xl font-bold">Sign Up</h1>
           <p className="mt-1">
             Already have an account?{" "}
-            <Link href="/login" className="text-blue-500">
+            <Link href="/login" className="text-blue-500 hover:underline">
               Sign In
             </Link>{" "}
             Here
@@ -196,12 +191,7 @@ const Page = () => {
               </option>
             </select> */}
           {/* </div> */}
-          <button
-            type="submit"
-            className="px-3 py-1.5 border border-[#fefefe] mt-4 hover:bg-[#fefefe] hover:text-black transition-all"
-          >
-            Sign Up
-          </button>
+          <SubmitButton props="Sign Up"/>
         </form>
       </div>
     </div>
