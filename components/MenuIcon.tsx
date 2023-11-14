@@ -10,14 +10,16 @@ type MenuIconProps = {
 const MenuIcon = ({ theme, isActive }: MenuIconProps) => {
   const path = usePathname();
   const [showMenu, setShowMenu] = useState(false);
+
   useEffect(() => {
     setShowMenu(false);
   }, [path]);
+
   return (
     <div
       className={`relative h-[25px] w-[25px] flex flex-col justify-between items-center cursor-pointer overflow-hidden ${
         isActive ? "z-[11]" : "z-10 delay-500"
-      }`}
+      } group`}
       onClick={() => {
         setShowMenu(!showMenu);
       }}
@@ -34,7 +36,7 @@ const MenuIcon = ({ theme, isActive }: MenuIconProps) => {
         />
       </div>
       <div
-        className={`relative h-[10px] w-full flex items-center justify-between transition-all ease-in-out duration-500 ${
+        className={`relative h-[10px] w-full flex items-center justify-between transition-all ease-in-out duration-500 group-hover:translate-x-[30px] ${
           showMenu ? "translate-x-[30px]" : "delay-500 translate-x-0"
         }`}
       >
