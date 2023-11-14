@@ -26,13 +26,7 @@ git clone https://github.com/Darkrider0007/Shark-Tank.git
 npm install
 ```
 
-3. Download Node Modules
-
-```
-npm install
-```
-
-4. Add environment variables in `.env.local` file. Make sure this file must created into root directory
+3. Add environment variables in `.env.local` file. Make sure this file must created into root directory
 
 ```
 NEXT_PUBLIC_APPWRITE_URL=""
@@ -47,7 +41,7 @@ NEXT_PUBLIC_EMAILJS_PUBLIC_KEY =""
 NEXT_PUBLIC_EMAILJS_TEMPLATE_ID = ""
 ```
 
-5. Run the development server using
+4. Run the development server using
 
 ```
 npm run dev
