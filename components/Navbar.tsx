@@ -10,7 +10,9 @@ const Navbar = () => {
   const path = usePathname();
   const [isActive, setIsActive] = useState(false);
 
-  const authStatus = useSelector((state: { auth: { status: boolean } }) => state.auth.status);
+  const authStatus = useSelector(
+    (state: { auth: { status: boolean } }) => state.auth.status
+  );
 
   useEffect(() => {
     setIsActive(false);
@@ -38,12 +40,18 @@ const Navbar = () => {
           isActive ? "-translate-x-0" : "translate-x-full"
         } flex justify-center items-center opacity-90 backdrop-blur`}
       >
-        <div className="flex flex-col justify-between items-start text-5xl gap-5">
+        <div className="flex flex-col justify-between items-center text-5xl gap-5">
           <Link href="/pitches" className="hover:underline">
             Pitches
           </Link>
+          <Link href="/about" className="hover:underline">
+            About
+          </Link>
+          <Link href="/contact" className="hover:underline">
+            Contact
+          </Link>
           {authStatus ? (
-              <Logout/>
+            <Logout />
           ) : (
             <Link href="/login" className="hover:underline ">
               Login
