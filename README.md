@@ -17,7 +17,7 @@ Shark Tank is an exciting college project aimed at creating a dynamic web applic
 1. Clone the repository.
 
 ```
-git clone gh repo clone Darkrider0007/Shark-Tank
+git clone https://github.com/Darkrider0007/Shark-Tank.git
 ```
 
 2. Install dependencies using
