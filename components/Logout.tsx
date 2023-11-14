@@ -1,6 +1,6 @@
 import React from 'react'
 import authService from "../app/appwrite/auth";
-import { logout as authLogout } from "../app/GlobalRedux/Features/authSlice"
+import { authlogout } from "../app/GlobalRedux/Features/authSlice"
 import { useDispatch } from 'react-redux';
 
 function Logout() {
@@ -8,7 +8,7 @@ function Logout() {
     const setLogout = () => {
         authService.logout().
             then(() => {
-                dispatch(authLogout())
+                dispatch(authlogout())
             });
     }
     return (
