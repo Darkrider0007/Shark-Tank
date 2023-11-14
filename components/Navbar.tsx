@@ -47,7 +47,7 @@ const Navbar = () => {
           <Link href="/about" className="hover:underline">
             About
           </Link>
-          <Link href="/contact" className="hover:underline">
+          <Link href="/contacts" className="hover:underline">
             Contact
           </Link>
           {authStatus ? (

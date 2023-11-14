@@ -1,8 +1,6 @@
+import { AddOffer, OfferCard, PitchDetail } from "@/components";
 import React from "react";
-import Navbar from "@/components/Navbar";
-import PitchDetail from "@/components/PitchDetail";
-import AddOffer from "@/components/AddOffer";
-import OfferCard from "@/components/OfferCard";
+
 
 const Page = () => {
   return (
