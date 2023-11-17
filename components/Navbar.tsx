@@ -44,9 +44,10 @@ const Navbar = () => {
           <Link href="/pitches" className="hover:underline">
             Pitches
           </Link>
-          <Link href="/about" className="hover:underline">
+          {authStatus ? <Link href="/add-pitch" className="hover:underline ">Add Pitch</Link>
+          :<Link href="/about" className="hover:underline">
             About
-          </Link>
+          </Link>}
           <Link href="/contacts" className="hover:underline">
             Contact
           </Link>
