@@ -30,13 +30,13 @@ const About = () => {
       <Carousel items={carouselItems} />
 
       <div className="w-full min-h-full p-1 flex flex-col justify-start items-start text-white gap-2 mt-10">
-        <p className="text-2xl">Some Offers</p>
+        <p className="text-4xl">Some Offers</p>
         <div className="w-full min-h-full grid grid-cols-3 gap-5 max-md:grid-cols-2 max-sm:grid-cols-1">
           <OfferCard />
           <OfferCard />
           <OfferCard />
         </div>
-      IC</div>
+      </div>
 
       <div className="w-full min-h-full p-3 flex flex-col justify-start items-start text-white gap-2">
         <p className="text-2xl">Famous Investers</p>
