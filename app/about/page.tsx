@@ -1,57 +1,64 @@
+"use client"
 import React from "react";
-import OfferCard from "@/components/OfferCard";
+import Image from "next/image";
+import { Carousel, OfferCard } from "@/components";
+
 
 const About = () => {
-      return(
-        <div className="min-h-screen w-full bg-bg_dark_primary flex flex-col justify-start items-center gap-3 text-white">
 
-        <h1 className="text-3xl">SHARKTANK</h1>
-          <p className="w-3/4 leading-relaxed text-l">
-            &quot;Shark Tank&quot; is a popular American television show that
-            features aspiring entrepreneurs and inventors pitching their
-            business ideas or products to a panel of wealthy investors, known as
-            &quot;sharks&quot;. The entrepreneurs hope to secure investment
-            deals from the sharks in exchange for a percentage of their
-            company&apos;s equity. Each contestant has a limited time to make
-            their pitch, after which the sharks can ask questions and negotiate
-            terms. The show is known for its high-stakes drama, candid feedback
-            from the sharks, and the potential for life-changing investment
-            offers. &quot;Shark Tank&quot; has not only provided a platform for
-            entrepreneurs to showcase their innovations but has also entertained
-            and inspired millions of viewers around the world.
-          </p>
-  
-        <div className="w-full min-h-full p-1 flex flex-col justify-start items-start text-white gap-2">
+  const carouselItems = [
+    { imageUrl: '/Idea_Pitching.jpg', heading: 'Pitch Your Idea', paragraph: ' Seamlessly showcase your groundbreaking concepts through a user-friendly interface. From product prototypes to service-based solutions, Shark-Tank empowers you to present your vision effectively.' },
+    { imageUrl: '/MeetWithInvestor.jpg', heading: 'Connect with Investors', paragraph: 'Our robust networking capabilities enable you to approach a diverse range of investors actively seeking the next big thing. Browse through profiles, review investment preferences, and connect with potential backers who share your passion for innovation.' },
+    { imageUrl: '/IdeaMarketPlace.jpg', heading: 'Idea Marketplace', paragraph: 'Investors, explore a diverse range of ideas and projects from talented individuals worldwide. Discover opportunities that align with your investment strategy and contribute to the next wave of industry-disrupting innovations.' },
+    { imageUrl: '/pexels-fauxels-3184291.jpg', heading: 'Secure Collaboration', paragraph: 'Communicate securely within the platform, ensuring confidentiality during negotiations and collaboration. Our advanced messaging system enables seamless communication between entrepreneurs and investors.' },
+    // Add more items as needed
+  ];
+
+  return (
+    <div className="min-h-screen w-full bg-bg_dark_primary flex flex-col justify-start items-center gap-3 text-white">
+
+      <div className="my-10 justify-center items-center flex flex-col w-full">
+        <h1 className="text-6xl mb-3">SHARKTANK</h1>
+        <p className="w-3/4 text-lg leading-relaxed text-l">
+        Welcome to Shark-Tank, a cutting-edge platform where aspiring entrepreneurs converge with seasoned investors.
+        Our sleek interface transforms ideas into compelling pitches, fostering live interactions and secure collaborations.
+          It&apos;s not just an app; it&apos;s the global arena where dreams meet capital, forging a future shaped by groundbreaking innovations.
+        </p>
+      </div>
+
+
+      <Carousel items={carouselItems} />
+
+      <div className="w-full min-h-full p-1 flex flex-col justify-start items-start text-white gap-2 mt-10">
         <p className="text-2xl">Some Offers</p>
         <div className="w-full min-h-full grid grid-cols-3 gap-5 max-md:grid-cols-2 max-sm:grid-cols-1">
-          <OfferCard/>
-          <OfferCard/>
-          <OfferCard/>
+          <OfferCard />
+          <OfferCard />
+          <OfferCard />
         </div>
-      </div>
+      IC</div>
 
       <div className="w-full min-h-full p-3 flex flex-col justify-start items-start text-white gap-2">
         <p className="text-2xl">Famous Investers</p>
         <div className="w-full min-h-full grid grid-cols-3 gap-5 max-md:grid-cols-2 max-sm:grid-cols-1">
-        <p>profile 1</p>
-        <p>profile 2</p>
-        <p>profile 3</p>
+          <p>profile 1</p>
+          <p>profile 2</p>
+          <p>profile 3</p>
         </div>
       </div>
 
       <div className="w-full min-h-full p-3 flex flex-col justify-start items-start text-white gap-2">
         <p className="text-2xl">Successful Entrepreneurs</p>
         <div className="w-full min-h-full grid grid-cols-3 gap-5 max-md:grid-cols-2 max-sm:grid-cols-1">
-        <p>profile 1</p>
-        <p>profile 2</p>
-        <p>profile 3</p>
+          <p>profile 1</p>
+          <p>profile 2</p>
+          <p>profile 3</p>
         </div>
       </div>
 
-      </div>
+    </div>
 
-      )
-
+  )
 }
 
 export default About;
