@@ -67,114 +67,118 @@ const Page = () => {
     }
   };
 
-  if(loading){
-    return(
-      <AddPageLoader prop="Holding Up"/>
-    )    
+  if (loading) {
+    return (
+      <AddPageLoader prop="Holding Up" />
+    )
   }
 
   return (
-    <div className="min-h-screen w-full bg-bg_dark_primary flex justify-end items-start text-[#fefefe]">
-      <div className="max-w-[450px] min-h-screen bg-bg_dark_secondary shadow-lg p-2 pb-10 pr-5">
-        <div className="flex flex-col justify-between items-start w-full">
-          <Image
-            src="/STlogo1.png"
-            alt="logo"
-            height={80}
-            width={80}
-            className="object-cover"
-          />
-          <h1 className="text-3xl font-bold">Sign Up</h1>
-          <p className="mt-1">
-            Already have an account?{" "}
-            <Link href="/login" className="text-blue-500 hover:underline">
-              Sign In
-            </Link>{" "}
-            Here
-          </p>
-          {/* <p className="mt-2 text-lg">See which shark is waiting for you</p> */}
-        </div>
+    <div className="min-h-screen w-full bg-bg_dark_primary flex md:flex-row justify-end md:justify-between items-start md:items-center text-[#fefefe]">
+      <div className="ml-0 md:ml-40 hidden md:block">
+        <Image src='/signup.png' alt="signup" width={800} height={600}/>
+      </div>
+      <div>
+        <div className="max-w-[450px] min-h-screen bg-bg_dark_secondary shadow-lg p-2 pl-10 pb-10 pr-5">
+          <div className="flex flex-col justify-between items-start w-full">
+            <Image
+              src="/STlogo1.png"
+              alt="logo"
+              height={80}
+              width={80}
+              className="object-cover"
+            />
+            <h1 className="text-3xl font-bold">Sign Up</h1>
+            <p className="mt-1">
+              Already have an account?{" "}
+              <Link href="/login" className="text-blue-500 hover:underline">
+                Sign In
+              </Link>{" "}
+              Here
+            </p>
+            {/* <p className="mt-2 text-lg">See which shark is waiting for you</p> */}
+          </div>
 
-        {error && <p className="text-red-500">{error}</p>}
-        {/* -----------------Form Starts Here----------------- */}
+          {error && <p className="text-red-500">{error}</p>}
+          {/* -----------------Form Starts Here----------------- */}
 
-        <form
-          className="flex flex-col justify-start items-start w-full mt-4"
-          onSubmit={handleSubmit(handleSignUp)}
-        >
-          <div className="flex flex-col justify-between items-start mb-4 w-full">
-            <p>Full Name</p>
-            <div className="flex justify-between items-center w-full p-2 bg-transparent border border-[#fefefe] mt-1">
-              <input
-                type="text"
-                placeholder="Enter Your Full Name"
-                className="bg-transparent focus:outline-none w-full"
-                {...register("name", {
-                  required: true,
-                })}
-              />
-              <FaUserCircle className="text-xl ml-2" />
-            </div>
-          </div>
-          <div className="flex flex-col justify-between items-start mb-4 w-full">
-            <p>Email</p>
-            <div className="flex justify-between items-center w-full p-2 bg-transparent border border-[#fefefe] mt-1">
-              <input
-                type="email"
-                placeholder="Enter Your Email"
-                className="bg-transparent focus:outline-none w-full"
-                {...register("email", {
-                  required: true,
-                  validate: {
-                    matchPatern: (value) =>
-                      /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(
-                        value
-                      ) || "Email address must be a valid address",
-                  },
-                })}
-              />
-              <MdAlternateEmail className="text-xl ml-2" />
-            </div>
-          </div>
-          <div className="flex flex-col justify-between items-start mb-4 w-full">
-            <p>Password</p>
-            <div className="flex justify-between items-center w-full p-2 bg-transparent border border-[#fefefe] mt-1">
-              <input
-                type={`${showPassword ? "text" : "password"}`}
-                placeholder="Enter Your Password"
-                className="bg-transparent focus:outline-none w-full"
-                {...register("password", {
-                  required: true,
-                })}
-              />
-              {showPassword ? (
-                <AiFillEyeInvisible
-                  className="text-xl ml-2 cursor-pointer"
-                  onClick={handleShowPassword}
+          <form
+            className="flex flex-col justify-start items-start w-full mt-4"
+            onSubmit={handleSubmit(handleSignUp)}
+          >
+            <div className="flex flex-col justify-between items-start mb-4 w-full">
+              <p>Full Name</p>
+              <div className="flex justify-between items-center w-full p-2 bg-transparent border border-[#fefefe] mt-1">
+                <input
+                  type="text"
+                  placeholder="Enter Your Full Name"
+                  className="bg-transparent focus:outline-none w-full"
+                  {...register("name", {
+                    required: true,
+                  })}
                 />
-              ) : (
-                <AiFillEye
-                  className="text-xl ml-2 cursor-pointer"
-                  onClick={handleShowPassword}
+                <FaUserCircle className="text-xl ml-2" />
+              </div>
+            </div>
+            <div className="flex flex-col justify-between items-start mb-4 w-full">
+              <p>Email</p>
+              <div className="flex justify-between items-center w-full p-2 bg-transparent border border-[#fefefe] mt-1">
+                <input
+                  type="email"
+                  placeholder="Enter Your Email"
+                  className="bg-transparent focus:outline-none w-full"
+                  {...register("email", {
+                    required: true,
+                    validate: {
+                      matchPatern: (value) =>
+                        /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(
+                          value
+                        ) || "Email address must be a valid address",
+                    },
+                  })}
                 />
-              )}
+                <MdAlternateEmail className="text-xl ml-2" />
+              </div>
             </div>
-          </div>
-          <div className="flex flex-col justify-between items-start mb-4 w-full">
-            <p>Confirm Password</p>
-            <div className="flex justify-between items-center w-full p-2 bg-transparent border border-[#fefefe] mt-1">
-              <input
-                type="password"
-                placeholder="Re-Enter Your Password"
-                className="bg-transparent focus:outline-none w-full"
-                {...register("confirmPassword", {
-                  required: true,
-                })}
-              />
-              <BsShieldLockFill className="text-xl ml-2" />
+            <div className="flex flex-col justify-between items-start mb-4 w-full">
+              <p>Password</p>
+              <div className="flex justify-between items-center w-full p-2 bg-transparent border border-[#fefefe] mt-1">
+                <input
+                  type={`${showPassword ? "text" : "password"}`}
+                  placeholder="Enter Your Password"
+                  className="bg-transparent focus:outline-none w-full"
+                  {...register("password", {
+                    required: true,
+                  })}
+                />
+                {showPassword ? (
+                  <AiFillEyeInvisible
+                    className="text-xl ml-2 cursor-pointer"
+                    onClick={handleShowPassword}
+                  />
+                ) : (
+                  <AiFillEye
+                    className="text-xl ml-2 cursor-pointer"
+                    onClick={handleShowPassword}
+                  />
+                )}
+              </div>
             </div>
-          </div>
-          {/* <div className="flex flex-col justify-between items-start mb-4 w-full">
+            <div className="flex flex-col justify-between items-start mb-4 w-full">
+              <p>Confirm Password</p>
+              <div className="flex justify-between items-center w-full p-2 bg-transparent border border-[#fefefe] mt-1">
+                <input
+                  type="password"
+                  placeholder="Re-Enter Your Password"
+                  className="bg-transparent focus:outline-none w-full"
+                  {...register("confirmPassword", {
+                    required: true,
+                  })}
+                />
+                <BsShieldLockFill className="text-xl ml-2" />
+              </div>
+            </div>
+            {/* <div className="flex flex-col justify-between items-start mb-4 w-full">
             <p>Role</p>
             <select
               className="w-full p-2 bg-transparent border border-[#945353] mt-1 focus:outline-none"
@@ -190,9 +194,10 @@ const Page = () => {
                 Investor
               </option>
             </select> */}
-          {/* </div> */}
-          <SubmitButton props="Sign Up"/>
-        </form>
+            {/* </div> */}
+            <SubmitButton props="Sign Up" />
+          </form>
+        </div>
       </div>
     </div>
   );
