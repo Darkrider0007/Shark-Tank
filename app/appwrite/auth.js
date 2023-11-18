@@ -13,21 +13,49 @@ export class AppwriteAuth {
     this.databases = new Databases(this.client);
   }
 
-  async createUserDatabase({ UserId, role }) {
-    console.log(UserId, role);
+  async createUserDatabase({ UserID, role }) {
+    console.log(UserID, role);
     //console.log(conf.appwriteUserDatabaseID, conf.appwriteUserCollectionID);
     try {
       return await this.databases.createDocument(
         conf.appwriteUserDatabaseID,
         conf.appwriteUserCollectionID,
-        ID.unique(),
+        UserID,
         {
-          UserID: UserId,
+          UserID,
           role,
         }
       );
     } catch (error) {
       console.log(`Appwrite Create User Database Error: ${error}`);
+    }
+  }
+
+  async updateUserDatabase({UserID,role}){
+    try {
+      return await this.databases.updateDocument(
+        conf.appwriteUserDatabaseID,
+        conf.appwriteUserCollectionID,
+        UserID,
+        {
+          role
+        }
+      )
+    } catch (error) {
+      console.log(`Appwrite Update User Database Error: ${error}`);
+    }
+  }
+
+  async getUserDatabase(UserID){
+    console.log(UserID);
+    try {
+      return await this.databases.getDocument(
+        conf.appwriteUserDatabaseID,
+        conf.appwriteUserCollectionID,
+        UserID
+      )
+    } catch (error) {
+      console.log(`Appwrite Get User Database Error: ${error}`);
     }
   }
 

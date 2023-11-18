@@ -2,13 +2,18 @@
 import authService from '@/app/appwrite/auth'
 import { SubmitButton } from '@/components'
 import Image from 'next/image'
-import React, { use } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 
 export default function Page({ params }: any) {
+  const [userDatabase, setUserDatabase] = useState({})
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm({
+    defaultValues :{
+      role : "Entrepreneur"
+    }
+  });
 
   const userData = useSelector(
     (state: {
@@ -20,14 +25,38 @@ export default function Page({ params }: any) {
 
   // console.log(params.id)
   const update = async (data: any) => {
-    try {
-      const updateRole = await authService.createUserDatabase({UserId : params.id,role :data.role})
-      console.log(updateRole)
-    } catch (error: any) {
-      console.log("There was an error", error.message)
+    const userInfo = await authService.getUserDatabase(params.id);
+    if(userInfo){
+      try {
+        console.log("I am operate from update")
+        console.log(data.role)
+        const updatedRole = await authService.updateUserDatabase({UserID : params.id,role :data.role})
+        console.log(updatedRole)
+      } catch (error:any) {
+        console.log("There was an error to update", error.message)
+      }
+    }else{
+      try {
+        const role = await authService.createUserDatabase({UserID : params.id,role :data.role})
+        console.log(role)  
+      } catch (error: any) {
+        console.log("There was an error to create role", error.message)
+      }
     }
-    console.log(data)
+    
   }
+
+  useEffect(() => {
+    ;(async () => {
+      try {
+        const userInfo = await authService.getUserDatabase(params.id) || {};
+        console.log(userInfo);
+        setUserDatabase(userInfo);
+      } catch (error: any) {
+        console.log("There was an error", error.message);
+      }
+    })();
+  }, []);
 
   return (
 
