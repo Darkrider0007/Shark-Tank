@@ -1,19 +1,21 @@
-import { Account, Client, Databases, ID, Permission, Role } from "appwrite";
+import { Account, Client, Databases, ID, Permission, Role, Storage } from "appwrite";
 import conf from "../conf/conf";
 
 export class AppwriteAuth {
   client = new Client();
   account;
   databases;
+  bucket;
   constructor() {
     this.client
       .setEndpoint(conf.appwriteUrl)
       .setProject(conf.appwriteProjectId);
     this.account = new Account(this.client);
     this.databases = new Databases(this.client);
+    this.bucket = new Storage(this.client);
   }
 
-  async createUserDatabase({ UserID, role }) {
+  async createUserDatabase({ UserID, role,User_Avatar }) {
     console.log(UserID, role);
     //console.log(conf.appwriteUserDatabaseID, conf.appwriteUserCollectionID);
     try {
@@ -24,6 +26,7 @@ export class AppwriteAuth {
         {
           UserID,
           role,
+          User_Avatar
         }
       );
     } catch (error) {
@@ -31,7 +34,7 @@ export class AppwriteAuth {
     }
   }
 
-  async updateUserDatabase({UserID,role}){
+  async updateUserDatabase({UserID,role,User_Avatar}){
     console.log(UserID, role);
     try {
       return await this.databases.updateDocument(
@@ -39,7 +42,8 @@ export class AppwriteAuth {
         conf.appwriteUserCollectionID,
         UserID,
         {
-          role
+          role,
+          User_Avatar
         }
       )
     } catch (error) {
@@ -103,6 +107,38 @@ export class AppwriteAuth {
     } catch (error) {
       console.log(`Appwrite Logout Error: ${error}`);
     }
+  }
+
+  async uploadAvatar(file){
+    try {
+      return await this.bucket.createFile(
+        conf.appwriteUserBucketId,
+        ID.unique(),
+        file
+    )
+    } catch (error) {
+      console.log(`Appwrite Upload Avatar error: ${error}`)
+    }
+  }
+
+  async deleteAvatar(fileId){
+    try {
+        await this.bucket.deleteFile(
+            conf.appwriteUserBucketId,
+            fileId
+        )
+        return true
+    } catch (error) {
+        console.log("Appwrite Delete File error", error);
+        return false
+    }
+  }
+
+  getAvatar(fileId){
+      return this.bucket.getFilePreview(
+          conf.appwriteUserBucketId,
+          fileId
+      )
   }
 }
 
