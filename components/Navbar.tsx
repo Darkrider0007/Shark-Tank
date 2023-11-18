@@ -14,6 +14,15 @@ const Navbar = () => {
     (state: { auth: { status: boolean } }) => state.auth.status
   );
 
+  const userData = useSelector(
+    (state: {
+      auth: {
+        userData: any
+      }
+    }) => state.auth.userData
+  );
+  //console.log(userData)
+
   useEffect(() => {
     setIsActive(false);
   }, [path]);
@@ -29,7 +38,17 @@ const Navbar = () => {
             className="object-cover"
           />
         </Link>
-        <div className="flex flex-row gap-4">
+        
+        <div className="flex flex-row gap-4 items-center">
+          {authStatus && <Link href={`/user/${userData.$id}`}>
+            <Image
+              src="/STlogo2.png"
+              alt="logo"
+              height={50}
+              width={50}
+              className="object-cover"
+            />
+          </Link>}
           <div onClick={() => setIsActive(!isActive)}>
             <MenuIcon theme="dark" isActive={isActive} />
           </div>

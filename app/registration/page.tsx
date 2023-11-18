@@ -59,7 +59,11 @@ const Page = () => {
       if (userData) {
         const data = await authService.getCurrentUser();
         dispatch(authLogin(data));
-        router.push("/");
+        if(data) {
+          router.push(`/user/${data.$id}`);
+        }else{
+          router.push('/')
+        }
       }
     } catch (error: any) {
       setLoading(false);
