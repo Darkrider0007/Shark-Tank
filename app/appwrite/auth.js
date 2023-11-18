@@ -15,14 +15,14 @@ export class AppwriteAuth {
 
   async createUserDatabase({ UserId, role }) {
     console.log(UserId, role);
-    console.log(conf.appwriteUserDatabaseID, conf.appwriteUserCollectionID);
+    //console.log(conf.appwriteUserDatabaseID, conf.appwriteUserCollectionID);
     try {
       return await this.databases.createDocument(
-        conf.appwriteDatabaseId,
-        conf.appwriteCollectionId,
+        conf.appwriteUserDatabaseID,
+        conf.appwriteUserCollectionID,
         ID.unique(),
         {
-          UserId,
+          UserID: UserId,
           role,
         }
       );
