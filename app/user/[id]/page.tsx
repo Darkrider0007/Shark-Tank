@@ -1,19 +1,30 @@
 "use client"
 import authService from '@/app/appwrite/auth'
-import { SubmitButton } from '@/components'
+import { AddPageLoader, SubmitButton } from '@/components'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 
 export default function Page({ params }: any) {
+  const [errors, setErrors] = useState({});
   const [userDatabase, setUserDatabase] = useState({})
+  const [loading, setLoading] = useState(false)
 
-  const { register, handleSubmit } = useForm({
+  const { register, handleSubmit, setError, formState: { errors: formErrors } } = useForm({
     defaultValues :{
-      role : "Entrepreneur"
+      role : "Entrepreneur",
+      updateImage : ""
     }
   });
+
+  const authUser = useSelector(
+    (state: {
+      auth: {
+         status: boolean
+      }
+    }) => state.auth.status
+  )
 
   const userData = useSelector(
     (state: {
@@ -25,6 +36,7 @@ export default function Page({ params }: any) {
 
   // console.log(params.id)
   const update = async (data: any) => {
+    setLoading(true)
     const userInfo = await authService.getUserDatabase(params.id);
     if(userInfo){
       try {
@@ -32,15 +44,19 @@ export default function Page({ params }: any) {
         console.log(data.role)
         const updatedRole = await authService.updateUserDatabase({UserID : params.id,role :data.role})
         console.log(updatedRole)
+        setLoading(false)
       } catch (error:any) {
         console.log("There was an error to update", error.message)
+        setLoading(false)
       }
     }else{
       try {
         const role = await authService.createUserDatabase({UserID : params.id,role :data.role})
         console.log(role)  
+        setLoading(false)
       } catch (error: any) {
         console.log("There was an error to create role", error.message)
+        setLoading(false)
       }
     }
     
@@ -56,7 +72,13 @@ export default function Page({ params }: any) {
         console.log("There was an error", error.message);
       }
     })();
-  }, []);
+  }, [params.id]);
+
+  if(loading){
+    return(
+      <AddPageLoader prop="Updating"/>
+    )
+  }
 
   return (
 
@@ -83,10 +105,21 @@ export default function Page({ params }: any) {
             <h1 className="text-xl">{userData?.email}</h1>
           </div>
         </div>
+
+        {
+          !authUser && (
+            <div className="flex flex-col justify-start items-start mt-10 gap-5">
+              <div className='flex flex-row items-center gap-5'>
+                <h1 className="text-2xl font-bold">Role &nbsp; </h1>
+                <h1 className="text-xl">{(userDatabase as any)?.role}</h1>
+              </div>
+            </div>
+          )
+        }
         {/* -------------------------------------------------------------------
-        ----------------------  Update Role -------------------------------
+        -------------------------------  Updates  -------------------------------
         ------------------------------------------------------------------- */}
-        <form className="flex flex-col justify-start items-start w-full mt-2"
+        {authUser && (<form className="flex flex-col justify-start items-start w-full mt-2"
           onSubmit={handleSubmit(update)}>
           <div className="flex flex-col justify-between items-start my-4 w-full">
             <p className='text-2xl mb-3'>Update Role</p>
@@ -105,13 +138,24 @@ export default function Page({ params }: any) {
               </option>
             </select>
           </div>
+          <div className="px-2">
+            <label className="text-2xl mb-3">Update Image</label>
+                <input
+                  type="file"
+                  className="my-4"
+                  accept="image/png, image/jpg, image/jpeg, image/gif"
+                  {...register("updateImage", {
+                     required: false
+                  })}
+                />
+            </div>
           <button
             type="submit"
             className="px-3 py-1.5 border border-[#fefefe] mt-4 rounded-lg hover:bg-white hover:text-black hover:px-3.2 hover:py-1.7"
           >
             Update
           </button>
-        </form>
+        </form>)}
       </div>
     </div>
   )

@@ -32,6 +32,7 @@ export class AppwriteAuth {
   }
 
   async updateUserDatabase({UserID,role}){
+    console.log(UserID, role);
     try {
       return await this.databases.updateDocument(
         conf.appwriteUserDatabaseID,
