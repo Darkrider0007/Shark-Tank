@@ -111,7 +111,7 @@ export default function Page({ params }: any) {
               <div className='rounded-full bg-slate-600 h-100 w-100 object-cover'>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={authService.getAvatar(userDatabase.User_Avatar)}
+                  src={authService.getAvatar((userDatabase as any).User_Avatar).toString()}
                   alt="user"  className="rounded-full h-36  w-36 object-cover"
                 />
               </div>
