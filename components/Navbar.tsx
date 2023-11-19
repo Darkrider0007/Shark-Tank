@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import MenuIcon from "./MenuIcon";
 import Logout from "./Logout";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import authService from "@/app/appwrite/auth";
 import { authlogout, login } from "@/app/GlobalRedux/Features/authSlice";
 const Navbar = () => {
