@@ -84,6 +84,7 @@ export class AppwriteAuth {
       }
     } catch (error) {
       console.log(`Appwrite Create Account Error: ${error}`);
+      throw new Error(error);
     }
   }
 
@@ -92,6 +93,7 @@ export class AppwriteAuth {
       return await this.account.createEmailSession(email, password);
     } catch (error) {
       console.log(`Appwrite Login Error: ${error}`);
+      throw new Error(error);
     }
   }
 

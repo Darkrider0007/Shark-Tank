@@ -119,7 +119,8 @@ export default function Page({ params }: any) {
 
     <div className="min-h-screen w-full bg-bg_dark_primary flex justify-center items-center text-[#fefefe]">
       <div className="max-w-[410px] h-screen w-full bg-bg_dark_secondary shadow-lg p-6">
-        <div className='flex justify-center items-center mt-10'>
+        <div className='flex justify-center flex-col items-center mt-10'>
+          <h1 className='flex justify-center items-center text-4xl font-bold mb-6'>User Information</h1>
           {(userDatabase as any).User_Avatar ?
             (
               <div className='rounded-full bg-slate-600 h-100 w-100 object-cover'>

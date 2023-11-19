@@ -28,14 +28,16 @@ const Navbar = () => {
 
  useEffect(() =>{
   const getUserDatabase = async () => {
-    const user = await authService.getUserDatabase(userData.$id)
-    // console.log(user)
-    if(user){
-      setUserDatabase(user)
+    if(userData){
+      const user = await authService.getUserDatabase(userData.$id)
+      // console.log(user)
+      if(user){
+        setUserDatabase(user)
+      }
     }
   }
   getUserDatabase()
- },[userData.$id])
+ },[userData])
 
   useEffect(() => {
     setIsActive(false);
