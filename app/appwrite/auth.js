@@ -15,8 +15,8 @@ export class AppwriteAuth {
     this.bucket = new Storage(this.client);
   }
 
-  async createUserDatabase({ UserID, role,User_Avatar }) {
-    console.log(UserID, role);
+  async createUserDatabase({ UserID, role,User_Avatar,Email,userName }) {
+    //console.log(UserID, role);
     //console.log(conf.appwriteUserDatabaseID, conf.appwriteUserCollectionID);
     try {
       return await this.databases.createDocument(
@@ -26,7 +26,9 @@ export class AppwriteAuth {
         {
           UserID,
           role,
-          User_Avatar
+          User_Avatar,
+          Email,
+          userName
         }
       );
     } catch (error) {
@@ -34,8 +36,8 @@ export class AppwriteAuth {
     }
   }
 
-  async updateUserDatabase({UserID,role,User_Avatar}){
-    console.log(UserID, role);
+  async updateUserDatabase({UserID,role,User_Avatar,Email,userName}){
+    //console.log(UserID, role);
     try {
       return await this.databases.updateDocument(
         conf.appwriteUserDatabaseID,
@@ -43,7 +45,9 @@ export class AppwriteAuth {
         UserID,
         {
           role,
-          User_Avatar
+          User_Avatar,
+          Email,
+          userName
         }
       )
     } catch (error) {
@@ -52,7 +56,7 @@ export class AppwriteAuth {
   }
 
   async getUserDatabase(UserID){
-    console.log(UserID);
+    //console.log(UserID);
     try {
       return await this.databases.getDocument(
         conf.appwriteUserDatabaseID,

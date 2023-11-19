@@ -1,15 +1,16 @@
+/* eslint-disable @next/next/no-img-element */
 "use client"
 import authService from '@/app/appwrite/auth'
-import { AddPageLoader, SubmitButton } from '@/components'
-import Image from 'next/image'
+import { AddPageLoader } from '@/components'
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 
 export default function Page({ params }: any) {
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState("");
   const [userDatabase, setUserDatabase] = useState({})
   const [loading, setLoading] = useState(false)
+  const [firstTimeLoad, setFirstTimeLoad] = useState(true)
 
   const { register, handleSubmit, setError, formState: { errors: formErrors } } = useForm({
     defaultValues :{
@@ -40,6 +41,7 @@ export default function Page({ params }: any) {
     const userInfo = await authService.getUserDatabase(params.id);
     if(userInfo){
       try {
+        setErrors("");
         console.log("I am operate from update")
         console.log(data.role)
         console.log(data.updateImage[0]);
@@ -52,11 +54,14 @@ export default function Page({ params }: any) {
           UserID : params.id,
           role :data.role,
           User_Avatar: file ? file.$id : undefined,
+          Email:userData?.email,
+          userName:userData?.name
         })
         console.log(updatedRole)
         setLoading(false)
       } catch (error:any) {
-        console.log("There was an error to update", error.message)
+        setErrors(error.message || "An error occurred");
+        //console.log("There was an error to update", error.message)
         setLoading(false)
       }
     }else{
@@ -67,11 +72,14 @@ export default function Page({ params }: any) {
           UserID : params.id,
           role :data.role,
           User_Avatar: file ? file.$id : undefined,
+          Email:userData?.email,
+          userName:userData?.name
         })
         console.log(role)  
         setLoading(false)
       } catch (error: any) {
-        console.log("There was an error to create role", error.message)
+        setErrors(error.message || "An error occurred");
+        // console.log("There was an error to create role", error.message)
         setLoading(false)
       }
     }
@@ -82,18 +90,24 @@ export default function Page({ params }: any) {
     ;(async () => {
       try {
         const userInfo = await authService.getUserDatabase(params.id) || {};
-        console.log("User Info :")
-        console.log(userInfo);
+        // console.log("User Info :")
+        // console.log(userInfo);
         setUserDatabase(userInfo);
-        if(userDatabase){
-          console.log(authService.getAvatar((userDatabase as any).User_Avatar))
-        }
-
+          setFirstTimeLoad(false)
       } catch (error: any) {
-        console.log("There was an error", error.message);
+        setFirstTimeLoad(false)
+        setErrors(error.message || "An error occurred");
+        console.log("There was an error in getUserDatabase", error.message);
       }
     })();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.id]);
+
+  if(firstTimeLoad){
+    return(
+      <AddPageLoader prop="Holding Up!"/>
+    )
+  }
 
   if(loading){
     return(
@@ -109,10 +123,10 @@ export default function Page({ params }: any) {
           {(userDatabase as any).User_Avatar ?
             (
               <div className='rounded-full bg-slate-600 h-100 w-100 object-cover'>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
+
                 <img
                   src={authService.getAvatar((userDatabase as any).User_Avatar).toString()}
-                  alt="user"  className="rounded-full h-36  w-36 object-cover"
+                  alt="user" className="rounded-full h-36  w-36 object-cover"
                 />
               </div>
 
@@ -131,11 +145,11 @@ export default function Page({ params }: any) {
         <div className="flex flex-col justify-start items-start mt-10 gap-5">
           <div className='flex flex-row items-center gap-5'>
             <h1 className="text-2xl font-bold">User Name &nbsp; </h1>
-            <h1 className="text-xl">{userData?.name}</h1>
+            <h1 className="text-xl">{(userDatabase as any).userName}</h1>
           </div>
           <div className='flex flex-row items-center gap-5'>
             <h1 className="text-2xl font-bold">Email Id &nbsp; </h1>
-            <h1 className="text-xl">{userData?.email}</h1>
+            <h1 className="text-xl">{(userDatabase as any).Email}</h1>
           </div>
         </div>
 
@@ -152,6 +166,7 @@ export default function Page({ params }: any) {
         {/* -------------------------------------------------------------------
         -------------------------------  Updates  -------------------------------
         ------------------------------------------------------------------- */}
+        {errors && <p className="text-red-500">{errors}</p>}
         {authUser && (<form className="flex flex-col justify-start items-start w-full mt-2"
           onSubmit={handleSubmit(update)}>
           <div className="flex flex-col justify-between items-start my-4 w-full">
