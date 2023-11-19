@@ -108,10 +108,10 @@ export default function Page({ params }: any) {
         <div className='flex justify-center items-center mt-10'>
           {(userDatabase as any).User_Avatar ?
             (
-              <div>
+              <div className='rounded-full bg-slate-600 h-100 w-100 object-cover'>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="https://cloud.appwrite.io/v1/storage/buckets/65588fa2bd311a18ef30/files/65591647998905c60924/preview?project=654de1e9e072810dfbcc"
+                  src={authService.getAvatar(userDatabase.User_Avatar)}
                   alt="user"  className="rounded-full"
                 />
               </div>
