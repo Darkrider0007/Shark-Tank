@@ -112,7 +112,7 @@ export default function Page({ params }: any) {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={authService.getAvatar(userDatabase.User_Avatar)}
-                  alt="user"  className="rounded-full"
+                  alt="user"  className="rounded-full h-36  w-36 object-cover"
                 />
               </div>
 
