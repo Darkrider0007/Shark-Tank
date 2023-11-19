@@ -14,7 +14,7 @@ function Logout() {
     return (
         <button
             onClick={() => setLogout()}
-            className="hover:underline"
+            className="hover:underline text-red-600"
         >
             Logout
         </button>
