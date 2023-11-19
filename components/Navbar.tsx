@@ -12,29 +12,45 @@ const Navbar = () => {
   const path = usePathname();
   const [isActive, setIsActive] = useState(false);
   const [userDatabase, setUserDatabase] = useState({})
+  const [userData, setUserData] = useState<any>({})
   const [authStatus, setAuthStatus] = useState(false)
-  const [userData, setUserData] = useState({})
 
+  // const authStatus = useSelector(
+  //   (state: { auth: { status: boolean } }) => state.auth.status
+  // );
 
-  const dispatch = useDispatch()
+  // const userData = useSelector(
+  //   (state: {
+  //     auth: {
+  //       userData: any
+  //     }
+  //   }) => state.auth.userData
+  // );
+
+  // console.log(userData.$id)
+
+  const dispatch = useDispatch();
   useEffect(() => {
-    authService.getCurrentUser()
-    .then((userData) => {
+    const fetchCurrentUser = async () => {
+      const userData = await authService.getCurrentUser();
       if (userData) {
-        dispatch(login({userData}))
+        dispatch(login({ userData }));
         setAuthStatus(true)
         setUserData(userData)
       } else {
-        dispatch(authlogout())
+        dispatch(authlogout());
       }
-    })
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    };
+
+    fetchCurrentUser();
+  }, [dispatch,path]);
+
+  
 
  useEffect(() =>{
   const getUserDatabase = async () => {
     if(userData){
-      const user = await authService.getUserDatabase((userData as any).$id)
+      const user = await authService.getUserDatabase(userData.$id)
       // console.log(user)
       if(user){
         setUserDatabase(user)
@@ -44,18 +60,14 @@ const Navbar = () => {
   getUserDatabase()
  },[userData])
 
+ const clear = () => {
+  setAuthStatus(false)
+ }
+
   useEffect(() => {
     setIsActive(false);
   }, [path]);
 
-  const setLogout = () => {
-    authService.logout().
-    then(() => {
-      dispatch(authlogout())
-      setAuthStatus(false)
-      setUserData({})
-    });
-  }
   return (
     <>
       <div className="w-full px-5 py-2 flex justify-between items-center bg-bg_dark_secondary text-white shadow-md overflow-hidden">
@@ -70,7 +82,7 @@ const Navbar = () => {
         </Link>
         
         <div className="flex flex-row gap-4 items-center">
-          {authStatus && <Link href={`/user/${(userData as any).$id}`}>
+          {authStatus && <Link href={`/user/${userData.$id}`}>
           {(userDatabase as any).User_Avatar ?
             (
               <div className='rounded-full bg-slate-600 h-100 w-100 object-cover'>
@@ -115,12 +127,9 @@ const Navbar = () => {
             Contact
           </Link>
           {authStatus ? (
-            <button
-              onClick={() => setLogout()}
-              className="hover:underline text-red-600"
-            >
-              Logout
-            </button>
+            <div onClick={clear}>
+              <Logout />
+            </div>
           ) : (
             <Link href="/login" className="hover:underline ">
               Login
