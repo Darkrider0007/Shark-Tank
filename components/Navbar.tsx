@@ -5,31 +5,36 @@ import Image from "next/image";
 import Link from "next/link";
 import MenuIcon from "./MenuIcon";
 import Logout from "./Logout";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import authService from "@/app/appwrite/auth";
+import { authlogout, login } from "@/app/GlobalRedux/Features/authSlice";
 const Navbar = () => {
   const path = usePathname();
   const [isActive, setIsActive] = useState(false);
   const [userDatabase, setUserDatabase] = useState({})
+  const [authStatus, setAuthStatus] = useState(false)
+  const [userData, setUserData] = useState({})
 
-  const authStatus = useSelector(
-    (state: { auth: { status: boolean } }) => state.auth.status
-  );
 
-  const userData = useSelector(
-    (state: {
-      auth: {
-        userData: any
+  const dispatch = useDispatch()
+  useEffect(() => {
+    authService.getCurrentUser()
+    .then((userData) => {
+      if (userData) {
+        dispatch(login({userData}))
+        setAuthStatus(true)
+        setUserData(userData)
+      } else {
+        dispatch(authlogout())
       }
-    }) => state.auth.userData
-  );
-
-  // console.log(userData.$id)
+    })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
  useEffect(() =>{
   const getUserDatabase = async () => {
     if(userData){
-      const user = await authService.getUserDatabase(userData.$id)
+      const user = await authService.getUserDatabase((userData as any).$id)
       // console.log(user)
       if(user){
         setUserDatabase(user)
@@ -43,6 +48,14 @@ const Navbar = () => {
     setIsActive(false);
   }, [path]);
 
+  const setLogout = () => {
+    authService.logout().
+    then(() => {
+      dispatch(authlogout())
+      setAuthStatus(false)
+      setUserData({})
+    });
+  }
   return (
     <>
       <div className="w-full px-5 py-2 flex justify-between items-center bg-bg_dark_secondary text-white shadow-md overflow-hidden">
@@ -57,7 +70,7 @@ const Navbar = () => {
         </Link>
         
         <div className="flex flex-row gap-4 items-center">
-          {authStatus && <Link href={`/user/${userData.$id}`}>
+          {authStatus && <Link href={`/user/${(userData as any).$id}`}>
           {(userDatabase as any).User_Avatar ?
             (
               <div className='rounded-full bg-slate-600 h-100 w-100 object-cover'>
@@ -102,7 +115,12 @@ const Navbar = () => {
             Contact
           </Link>
           {authStatus ? (
-            <Logout />
+            <button
+              onClick={() => setLogout()}
+              className="hover:underline text-red-600"
+            >
+              Logout
+            </button>
           ) : (
             <Link href="/login" className="hover:underline ">
               Login
