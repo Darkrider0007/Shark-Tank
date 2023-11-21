@@ -10,7 +10,7 @@ export default function Home() {
           alt="logo"
           width={750}
           height={350}
-          className="absolute z-0 opacity-20"
+          className="fixed z-0 opacity-20"
         />
         <div className="z-[5] flex items-center flex-col mt-20 gap-4">
           <h1 className="text-6xl">SHARKTANK</h1>
