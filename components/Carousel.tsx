@@ -58,7 +58,7 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
           </div>
         ))}
       </div>
-      <div className="absolute z-30 flex -translate-x-1/2 space-x-3 rtl:space-x-reverse bottom-5 left-1/2">
+      <div className="absolute z-24 flex -translate-x-1/2 space-x-3 rtl:space-x-reverse bottom-5 left-1/2">
         {items.map((_, index) => (
           <button
             key={index}
@@ -75,7 +75,7 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
       </div>
       <button
         type="button"
-        className="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-2 cursor-pointer group focus:outline-none"
+        className="absolute top-0 start-0 z-24 flex items-center justify-center h-full px-2 cursor-pointer group focus:outline-none"
         data-carousel-prev
         onClick={() =>
           setActiveItem((prev) => (prev - 1 + items.length) % items.length)
@@ -87,7 +87,7 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
       </button>
       <button
         type="button"
-        className="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+        className="absolute top-0 end-0 z-24 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
         data-carousel-next
         onClick={() => setActiveItem((prev) => (prev + 1) % items.length)}
       >

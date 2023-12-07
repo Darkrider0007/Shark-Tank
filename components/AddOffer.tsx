@@ -57,7 +57,7 @@ const AddOffer = () => {
           <p>Comment</p>
           <textarea
             name="comment"
-            className="w-full min-h-[105px] rounded-sm focus:outline-none bg-transparent bg-bg_dark_placeholder px-2 py-1 mt-1 resize-none"
+            className="w-full min-h-[105px] rounded-sm focus:outline-none bg-bg_dark_placeholder px-2 py-1 mt-1 resize-none"
             required
             value={values.comment}
             onChange={handleChange}
@@ -79,7 +79,7 @@ const AddOffer = () => {
       </div>
       <button
         type="submit"
-        className="px-3 py-1.5 bg-transparent bg-bg_dark_placeholder mt-3"
+        className="px-3 py-1.5 bg-bg_dark_placeholder mt-3"
         onClick={handleSubmit}
       >
         Add Offer

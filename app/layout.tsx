@@ -1,7 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import  GlobalReduxProvider  from "./GlobalRedux/provider";
+import GlobalReduxProvider from "./GlobalRedux/provider";
 import Navbar from "@/components/Navbar";
 
 const poppins = Poppins({
@@ -11,7 +11,8 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: "Shark Tank",
-  description: "Shark Tank is a popular American television show that features aspiring entrepreneurs and inventors pitching their business ideas or products to a panel of wealthy investors, known as sharks. The entrepreneurs hope to secure investment deals from the sharks in exchange for a percentage of their company's equity. Each contestant has a limited time to make their pitch, after which the sharks can ask questions and negotiate terms. The show is known for its high-stakes drama, candid feedback from the sharks, and the potential for life-changing investment offers. Shark Tank has not only provided a platform for entrepreneurs to showcase their innovations but has also entertained and inspired millions of viewers around the world.",
+  description:
+    "Shark Tank is a popular American television show that features aspiring entrepreneurs and inventors pitching their business ideas or products to a panel of wealthy investors, known as sharks. The entrepreneurs hope to secure investment deals from the sharks in exchange for a percentage of their company's equity. Each contestant has a limited time to make their pitch, after which the sharks can ask questions and negotiate terms. The show is known for its high-stakes drama, candid feedback from the sharks, and the potential for life-changing investment offers. Shark Tank has not only provided a platform for entrepreneurs to showcase their innovations but has also entertained and inspired millions of viewers around the world.",
 };
 
 export default function RootLayout({
@@ -22,10 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.className} overflow-x-hidden`}>
-        <GlobalReduxProvider>
-        <Navbar/>
-        {children}
-        </GlobalReduxProvider>
+        <GlobalReduxProvider>{children}</GlobalReduxProvider>
       </body>
     </html>
   );
