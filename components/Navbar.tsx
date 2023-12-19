@@ -125,7 +125,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="w-full px-5 py-2 flex justify-between items-center text-white overflow-hidden">
+      <div className="w-full px-5 py-2 flex justify-between bg-bg_dark_primary items-center text-white overflow-hidden">
         <Link href="/">
           <Image
             src="/STlogo2.png"
