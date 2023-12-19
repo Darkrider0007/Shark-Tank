@@ -8,6 +8,62 @@ import Logout from "./Logout";
 import { useDispatch } from "react-redux";
 import authService from "@/app/appwrite/auth";
 import { authlogout, login } from "@/app/GlobalRedux/Features/authSlice";
+import { motion, AnimatePresence } from "framer-motion";
+
+const NavbarAnim = {
+  initial: {
+    scaleX: 0,
+  },
+  animate: {
+    scaleX: 1,
+    transition: {
+      duration: 0.5,
+      ease: [0.12, 0, 0.39, 0],
+    },
+  },
+  exit: {
+    scaleX: 0,
+    transition: {
+      delay: 0.5,
+      duration: 0.8,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const item = {
+  initial: {
+    y: "30vh",
+    transition: {
+      duration: 0.5,
+      ease: [0.12, 0, 0.39, 0],
+    },
+  },
+  animate: {
+    y: 0,
+    transition: {
+      delay: 0.5,
+      duration: 1,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const container = {
+  initial: {
+    transition: {
+      staggerChildren: 0.09,
+      staggerDirection: -1,
+    },
+  },
+  open: {
+    transition: {
+      delayChildren: 0.4,
+      staggerChildren: 0.09,
+      staggerDirection: 1,
+    },
+  },
+};
 
 const Navbar = () => {
   const path = usePathname();
@@ -126,38 +182,99 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <div
-        className={`w-full fixed top-0 min-h-screen bg-bg_dark_secondary text-white z-10 left-0 transition-all ease-in-out duration-500 ${
-          isActive ? "-translate-x-0" : "translate-x-full"
-        } flex justify-center items-center opacity-90 backdrop-blur`}
-      >
-        <div className="flex flex-col justify-between items-center text-5xl gap-5">
-          <Link href="/pitches" className="hover:underline">
-            Pitches
-          </Link>
-          {authStatus ? (
-            <Link href="/add-pitch" className="hover:underline ">
-              Add Pitch
-            </Link>
-          ) : (
-            <Link href="/about" className="hover:underline">
-              About
-            </Link>
-          )}
-          <Link href="/contacts" className="hover:underline">
-            Contact
-          </Link>
-          {authStatus ? (
-            <div onClick={clear}>
-              <Logout />
-            </div>
-          ) : (
-            <Link href="/login" className="hover:underline ">
-              Login
-            </Link>
-          )}
-        </div>
-      </div>
+      <AnimatePresence>
+        {isActive && (
+          <motion.div
+            className={`w-full fixed top-0 min-h-screen bg-bg_dark_primary text-white z-10 left-0 flex justify-center items-center origin-right`}
+            variants={NavbarAnim}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+          >
+            <motion.div
+              className="flex flex-col justify-between items-start text-7xl gap-5 uppercase font-oswald max-sm:text-5xl tracking-wide"
+              variants={container}
+              initial="initial"
+              animate="open"
+              exit="initial"
+            >
+              <div className="overflow-hidden">
+                <motion.div
+                  variants={item}
+                  initial="initial"
+                  animate="animate"
+                  exit="initial"
+                  className="overflow-hidden"
+                >
+                  <Link href="/pitches">Pitches</Link>
+                </motion.div>
+              </div>
+              {authStatus ? (
+                <div className="overflow-hidden">
+                  <motion.div
+                    variants={item}
+                    initial="initial"
+                    animate="animate"
+                    exit="initial"
+                    className="overflow-hidden"
+                  >
+                    <Link href="/add-pitch">Add Pitch</Link>
+                  </motion.div>
+                </div>
+              ) : (
+                <div className="overflow-hidden">
+                  <motion.div
+                    variants={item}
+                    initial="initial"
+                    animate="animate"
+                    exit="initial"
+                    className="overflow-hidden"
+                  >
+                    <Link href="/about">About</Link>
+                  </motion.div>
+                </div>
+              )}
+              <div className="overflow-hidden">
+                <motion.div
+                  variants={item}
+                  initial="initial"
+                  animate="animate"
+                  exit="initial"
+                  className="overflow-hidden"
+                >
+                  <Link href="/contacts">Contact</Link>
+                </motion.div>
+              </div>
+              {authStatus ? (
+                <div className="overflow-hidden">
+                  <motion.div
+                    onClick={clear}
+                    variants={item}
+                    initial="initial"
+                    animate="animate"
+                    exit="initial"
+                    className="overflow-hidden"
+                  >
+                    <Logout />
+                  </motion.div>
+                </div>
+              ) : (
+                <div className="overflow-hidden">
+                  <motion.div
+                    variants={item}
+                    initial="initial"
+                    animate="animate"
+                    exit="initial"
+                    className="overflow-hidden"
+                  >
+                    <Link href="/login">Login</Link>
+                  </motion.div>
+                </div>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };
