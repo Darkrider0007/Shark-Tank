@@ -18,7 +18,7 @@ const MenuIcon = ({ theme, isActive }: MenuIconProps) => {
   return (
     <div
       className={`relative h-[25px] w-[25px] flex flex-col justify-between items-center cursor-pointer overflow-hidden ${
-        isActive ? "z-[11]" : "z-10 delay-500"
+        isActive ? "z-[11]" : "z-10 delay-[1000ms]"
       } group`}
       onClick={() => {
         setShowMenu(!showMenu);
@@ -28,7 +28,7 @@ const MenuIcon = ({ theme, isActive }: MenuIconProps) => {
         <div
           className={`absolute ${
             theme === "dark" ? "bg-white" : "bg-black"
-          } h-[2px] rounded-xl transition-all ease-in-out duration-500 delay-300 ${
+          } h-[2px] rounded-xl transition-all ease-in-out duration-500 delay-100 ${
             showMenu
               ? "w-full rotate-45 translate-y-[8px]"
               : "w-1/2 -rotate-0 translate-y-0"
@@ -37,7 +37,7 @@ const MenuIcon = ({ theme, isActive }: MenuIconProps) => {
       </div>
       <div
         className={`relative h-[10px] w-full flex items-center justify-between transition-all ease-in-out duration-500 ${
-          showMenu ? "translate-x-[30px]" : "delay-500 translate-x-0"
+          showMenu ? "translate-x-[30px]" : "delay-200 translate-x-0"
         }`}
       >
         <div
@@ -50,7 +50,7 @@ const MenuIcon = ({ theme, isActive }: MenuIconProps) => {
         <div
           className={`absolute ${
             theme === "dark" ? "bg-white" : "bg-black"
-          } h-[2px] rounded-xl transition-all ease-in-out duration-500 delay-300 ${
+          } h-[2px] rounded-xl transition-all ease-in-out duration-500 delay-100 ${
             showMenu
               ? "w-full -rotate-45 -translate-y-[8px]"
               : "w-1/2 rotate-0 -translate-y-0"

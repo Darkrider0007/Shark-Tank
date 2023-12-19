@@ -13,6 +13,9 @@ const config: Config = {
         bg_dark_secondary: "#181717",
         bg_dark_placeholder: "#0c090a",
       },
+      fontFamily: {
+        oswald: ["var(--font-oswald)"],
+      },
     },
   },
   plugins: [],
