@@ -35,7 +35,6 @@ const About = () => {
 
   return (
     <div className="flex justify-start items-center w-full min-h-screen flex-col bg-bg_dark_primary">
-      <Navbar />
       <div className="flex flex-col min-h-screen w-full justify-start items-center">
         <div className="min-h-screen w-full flex flex-col justify-start items-center gap-3 text-white">
           <div className="my-10 justify-center items-center flex flex-col w-full">

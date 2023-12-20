@@ -14,7 +14,6 @@ export default function Home() {
           className="fixed z-0 opacity-20"
         /> */}
         <div className="flex justify-start items-center flex-col w-full min-h-screen">
-          <Navbar />
           <div className="z-[5] flex items-center flex-col mt-20 gap-4">
             <h1 className="text-6xl">SHARKTANK</h1>
             <p className="w-3/4 leading-relaxed text-xl">
