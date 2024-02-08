@@ -117,11 +117,10 @@ export default function Page({ params }: any) {
   }
 
   return (
-    <>
-      <Navbar/>
-      <div className="min-h-screen w-full bg-bg_dark_primary flex justify-center items-center text-[#fefefe]">
-        <div className="max-w-[410px] h-screen w-full bg-bg_dark_secondary shadow-lg shadow-gray-700 p-6">
-          <div className='flex justify-center flex-col items-center mt-10'>
+    <div className='flex flex-col justify-center items-start w-full min-h-screen bg-bg_dark_primary'>
+      <div className="min-h-screen w-full flex justify-center items-center text-[#fefefe] my-5">
+        <div className="max-w-[410px] min-h-[540px] w-full bg-bg_dark_secondary p-6 rounded-sm">
+          <div className='flex justify-center flex-col items-center mt-3'>
             <h1 className='flex justify-center items-center text-4xl font-bold mb-6'>User Information</h1>
             {(userDatabase as any).User_Avatar ?
               (
@@ -209,7 +208,7 @@ export default function Page({ params }: any) {
           </form>)}
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

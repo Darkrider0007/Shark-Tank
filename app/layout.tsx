@@ -1,17 +1,24 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Poppins, Oswald, Roboto } from "next/font/google";
+import { Poppins, Oswald, Kanit } from "next/font/google";
 import GlobalReduxProvider from "./GlobalRedux/provider";
 
-export const poppins = Poppins({
+const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "300", "600", "700"],
+  variable: "--font-poppins",
 });
 
-export const oswald = Oswald({
+const oswald = Oswald({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-oswald",
+});
+
+const kanit = Kanit({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-kanit",
 });
 
 export const metadata: Metadata = {
@@ -28,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${poppins.className} ${oswald.variable} overflow-x-hidden`}
+        className={`${poppins.className} ${oswald.variable} ${kanit.variable} overflow-x-hidden`}
       >
         <GlobalReduxProvider>{children}</GlobalReduxProvider>
       </body>
