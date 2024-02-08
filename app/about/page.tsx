@@ -3,6 +3,7 @@ import React from "react";
 import Image from "next/image";
 import { Carousel, OfferCard } from "@/components";
 import Navbar from "@/components/Navbar";
+import Slider from "@/components/Slider";
 
 const About = () => {
   const carouselItems = [
@@ -38,8 +39,10 @@ const About = () => {
       <div className="flex flex-col min-h-screen w-full justify-start items-center">
         <div className="min-h-screen w-full flex flex-col justify-start items-center gap-3 text-white">
           <div className="my-10 justify-center items-center flex flex-col w-full">
-            <h1 className="text-6xl mb-3">SHARKTANK</h1>
-            <p className="w-3/4 text-lg leading-relaxed text-l">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl mb-3 uppercase">
+              Sharktank
+            </h1>
+            <p className="w-3/4 sm:text-lg leading-relaxed text-center text-base">
               Welcome to Shark-Tank, a cutting-edge platform where aspiring
               entrepreneurs converge with seasoned investors. Our sleek
               interface transforms ideas into compelling pitches, fostering live
@@ -48,7 +51,7 @@ const About = () => {
               future shaped by groundbreaking innovations.
             </p>
           </div>
-          <Carousel items={carouselItems} />
+          <Slider items={carouselItems} />
           <div className="w-full min-h-full p-1 flex flex-col justify-start items-start text-white gap-2 mt-10">
             <p className="text-4xl">Some Offers</p>
             <div className="w-full min-h-full grid grid-cols-3 gap-5 max-md:grid-cols-2 max-sm:grid-cols-1">

@@ -4,8 +4,10 @@ import store from "./store";
 import Navbar from "@/components/Navbar";
 
 export default function GlobalReduxProvider({ children }: any) {
-  return <Provider store={store}>
-    <Navbar />
-    {children}
-  </Provider>;
+  return (
+    <Provider store={store}>
+      <Navbar />
+      {children}
+    </Provider>
+  );
 }

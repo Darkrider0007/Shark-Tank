@@ -15,6 +15,8 @@ const config: Config = {
       },
       fontFamily: {
         oswald: ["var(--font-oswald)"],
+        poppins: ["var(--font-poppins)"],
+        kanit: ["var(--font-kanit)"],
       },
     },
   },

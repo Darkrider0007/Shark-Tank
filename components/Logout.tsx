@@ -11,7 +11,7 @@ function Logout() {
     });
   };
   return (
-    <button onClick={() => setLogout()} className="text-red-600 overflow-hidden">
+    <button onClick={() => setLogout()} className="text-red-600 overflow-hidden uppercase">
       Logout
     </button>
   );
