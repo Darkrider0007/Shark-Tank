@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import authService from "@/app/appwrite/auth";
 import { authlogout, login } from "@/app/GlobalRedux/Features/authSlice";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaRegCircleUser } from "react-icons/fa6";
+import { AiOutlineGithub } from "react-icons/ai";
 
 const NavbarAnim = {
   initial: {
@@ -106,7 +106,7 @@ const Navbar = () => {
     const getUserDatabase = async () => {
       if (userData) {
         const user = await authService.getUserDatabase(userData.$id);
-        // console.log(user)
+        console.log(user);
         if (user) {
           setUserDatabase(user);
         }
@@ -150,10 +150,15 @@ const Navbar = () => {
                   />
                 </div>
               ) : (
-                <FaRegCircleUser />
+                <div className="h-8 w-8 text-lg rounded-full flex items-center justify-center bg-blue-800">
+                  {userData.name[0].toUpperCase()}
+                </div>
               )}
             </Link>
           )}
+          <Link href={"https://github.com/Darkrider0007/Shark-Tank"}>
+            <AiOutlineGithub size={30} />
+          </Link>
           <div onClick={() => setIsActive(!isActive)}>
             <MenuIcon theme="dark" isActive={isActive} />
           </div>
