@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import Footer from "@/components/Footer";
 
 const item = {
   initial: {
@@ -25,8 +26,8 @@ const item = {
 
 export default function Home() {
   return (
-    <>
-      <div className="min-h-screen bg-bg_dark_primary overflow-hidden overscroll-none flex justify-center text-white">
+    <div className="flex flex-col bg-bg_dark_primary">
+      <div className="overflow-hidden overscroll-none flex justify-center text-white">
         {/* <Image
           src="/SharktankLogo.png"
           alt="logo"
@@ -34,10 +35,10 @@ export default function Home() {
           height={350}
           className="fixed z-0 opacity-20"
         /> */}
-        <div className="flex justify-start items-center flex-col w-full min-h-screen">
+        <div className="flex justify-start items-center flex-col w-full">
           <div className="z-[5] flex items-center flex-col mt-20 gap-4">
             <motion.div
-              className="w-full flex justify-center items-center text-8xl font-kanit overflow-hidden"
+              className="w-full flex justify-center items-center text-4xl sm:temt-6xl md:text-8xl font-kanit overflow-hidden"
               initial="initial"
               animate="animate"
               transition={{ staggerChildren: 0.09, delayChildren: 0.3 }}
@@ -50,7 +51,12 @@ export default function Home() {
                 );
               })}
             </motion.div>
-            <p className="w-3/4 leading-relaxed text-xl">
+            <motion.p
+              className="w-3/4 leading-relaxed text-sm sm:text-base md:text-xl text-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1, duration: 1 }}
+            >
               <strong>Shark Tank</strong> is a popular American television show
               that features aspiring entrepreneurs and inventors pitching their
               business ideas or products to a panel of wealthy investors, known
@@ -64,7 +70,7 @@ export default function Home() {
               not only provided a platform for entrepreneurs to showcase their
               innovations but has also entertained and inspired millions of
               viewers around the world.
-            </p>
+            </motion.p>
             <Link
               href="/about"
               className="relative overflow-hidden mt-6 rounded-full border-white border-2 px-4 py-2 before:absolute before:content-[''] before:w-full before:h-full before:top-0 before:-left-full before:bg-white hover:before:left-0 before:transition-all before:duration-300 before:ease-in-out hover:text-black before:-z-[1]"
@@ -74,6 +80,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-    </>
+      <Footer />
+    </div>
   );
 }

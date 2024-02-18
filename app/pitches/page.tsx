@@ -1,4 +1,5 @@
 import AddOffer from "@/components/AddOffer";
+import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import OfferCard from "@/components/OfferCard";
 import PitchDetail from "@/components/PitchDetail";
@@ -21,6 +22,7 @@ const Page = () => {
           <OfferCard />
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

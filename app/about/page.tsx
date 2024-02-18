@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Carousel, OfferCard } from "@/components";
 import Navbar from "@/components/Navbar";
 import Slider from "@/components/Slider";
+import Footer from "@/components/Footer";
 
 const About = () => {
   const carouselItems = [
@@ -78,6 +79,7 @@ const About = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
