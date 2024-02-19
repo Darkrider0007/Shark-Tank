@@ -47,7 +47,25 @@ NEXT_PUBLIC_EMAILJS_TEMPLATE_ID = ""
 npm run dev
 ```
 
+5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Test Email and Password
+
+```
+Email:test@mail.com
+Password:12345678
+```
+## Team Members
+
+- [Neha Panda](https://www.github.com/Neha00011)
+- [Rohan Gope](https://www.github.com/Darkrider0007)
+- [Saikat Samanta](https://www.github.com/psykat1116)
+
+
+
+
 
 # License
 
 This project is licensed under the GNU General Public License v2.0 (GPL-2.0). See the LICENSE file for details.
+
