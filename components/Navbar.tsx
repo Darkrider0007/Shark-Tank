@@ -156,7 +156,7 @@ const Navbar = () => {
               )}
             </Link>
           )}
-          <Link href={"https://github.com/Darkrider0007/Shark-Tank"}>
+          <Link href={"https://github.com/Darkrider0007/Shark-Tank"} target="blank">
             <AiOutlineGithub size={30} />
           </Link>
           <div onClick={() => setIsActive(!isActive)}>
