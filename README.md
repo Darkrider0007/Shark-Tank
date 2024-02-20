@@ -1,8 +1,12 @@
+
+<img src="./public/STlogo1.png">
+
+
 # Shark Tank College Project
 
 ## Overview
 
-Shark Tank is an exciting college project aimed at creating a dynamic web application using Next.js. This project leverages various technologies to build a powerful and responsive platform.
+Shark Tank is an exciting college project associated with JGEC, aimed at creating a dynamic web application using Next.js. This project leverages various technologies to build a powerful and responsive platform.
 
 ## Technologies Used
 
