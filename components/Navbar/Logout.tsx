@@ -1,6 +1,6 @@
 import React from "react";
-import authService from "../app/appwrite/auth";
-import { authlogout } from "../app/GlobalRedux/Features/authSlice";
+import authService from "../../app/appwrite/auth";
+import { authlogout } from "../../app/GlobalRedux/Features/authSlice";
 import { useDispatch } from "react-redux";
 
 function Logout() {

@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import MenuIcon from "../MenuIcon";
-import Logout from "../Logout";
+import Logout from "./Logout";
 import { useDispatch } from "react-redux";
 import authService from "@/app/appwrite/auth";
 import { authlogout, login } from "@/app/GlobalRedux/Features/authSlice";

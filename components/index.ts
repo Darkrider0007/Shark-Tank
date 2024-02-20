@@ -1,6 +1,6 @@
 import AddPageLoader from "./AddPageLoader";
 import SubmitButton from "./SubmitButton";
-import Carousel from "./Carousel";
+import Carousel from "./Carousel/Carousel";
 import OfferCard from "./OfferCard";
 import ParticleConfig from "./ParticleConfig";
 

@@ -34,7 +34,7 @@ export default function Page({ params }: any) {
     }) => state.auth.status
   );
 
-  const userData = useSelector(
+  const userdata = useSelector(
     (state: {
       auth: {
         userData: any;
@@ -42,6 +42,11 @@ export default function Page({ params }: any) {
       };
     }) => state.auth.userData
   );
+
+  const userData = userdata?.userData;
+
+  // console.log(userData);
+  // console.log(userData?.email);
 
   // console.log(params.id)
   const update = async (data: any) => {
@@ -102,6 +107,7 @@ export default function Page({ params }: any) {
       try {
         const userInfo = (await authService.getUserDatabase(params.id)) || {};
         setUserDatabase(userInfo);
+        // console.log(userDatabase);
         setFirstTimeLoad(false);
       } catch (error: any) {
         setFirstTimeLoad(false);
@@ -139,7 +145,7 @@ export default function Page({ params }: any) {
                 />
               </div>
             ) : (
-              <div className="h-8 w-8 text-lg rounded-full flex items-center justify-cente">
+              <div className="h-40 w-40 text-lg rounded-full flex items-center justify-cente">
                 <LuUserCircle />
               </div>
             )}
