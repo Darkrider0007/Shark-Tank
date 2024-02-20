@@ -1,7 +1,7 @@
 "use client";
 import { Provider } from "react-redux";
 import store from "./store";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Navbar/Navbar";
 
 export default function GlobalReduxProvider({ children }: any) {
   return (

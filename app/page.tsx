@@ -1,9 +1,9 @@
 "use client";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Navbar/Navbar";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import Footer from "@/components/Footer";
+import Footer from "@/components/Footer/Footer";
 
 const item = {
   initial: {

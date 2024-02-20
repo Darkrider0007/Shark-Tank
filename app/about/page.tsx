@@ -2,9 +2,9 @@
 import React from "react";
 import Image from "next/image";
 import { Carousel, OfferCard } from "@/components";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Navbar/Navbar";
 import Slider from "@/components/Slider";
-import Footer from "@/components/Footer";
+import Footer from "@/components/Footer/Footer";
 
 const About = () => {
   const carouselItems = [
