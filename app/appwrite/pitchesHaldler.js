@@ -17,7 +17,9 @@ export class AppwritePitches {
     }
 
     async getPitchesDatabase(DocumentID) {
+        console.log("this is ",DocumentID);
         try {
+            console.log(DocumentID);
             return await this.databases.getDocument(
                 conf.appwriteUserDatabaseID,
                 conf.appwriteCollectionId,
