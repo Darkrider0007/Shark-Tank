@@ -8,7 +8,12 @@ import { useEffect, useState } from "react";
 
 export default function IndividualOffers({ params }: any) {
 
-    const [pitch, setPitch] = useState({} as any);
+    const [pitch, setPitch] = useState({
+        Title: ""|| "No Title",
+        Description: ""|| "No Description",
+        Equity: ""|| "No Equity",
+        Ask_Amount: ""|| "No Ask Amount",
+    } as any);
 
     const { id } = params;
 
@@ -17,7 +22,12 @@ export default function IndividualOffers({ params }: any) {
     const pitchDetails = async (id: any) => {
         try {
             const pitchdetails = await appwritePitches.getPitchesDatabase(id);
-            setPitch(pitchdetails);
+            setPitch({
+                Title: pitchdetails?.Title || "No Title",
+                Description: pitchdetails?.Description || "No Description",
+                Equity: pitchdetails?.Equity || "No Equity",
+                Ask_Amount: pitchdetails?.Ask_Amount || "No Ask Amount",
+            });
             console.log(pitchdetails);
         } catch (error) {
             console.log(error);
