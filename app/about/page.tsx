@@ -5,6 +5,8 @@ import { Carousel, OfferCard } from "@/components";
 import Navbar from "@/components/Navbar/Navbar";
 import Slider from "@/components/Slider";
 import Footer from "@/components/Footer/Footer";
+import { LampContainer } from "@/components/ui/lamp";
+import { motion } from "framer-motion";
 
 const About = () => {
   const carouselItems = [
@@ -39,7 +41,23 @@ const About = () => {
     <div className="flex justify-start items-center w-full min-h-screen flex-col bg-bg_dark_primary">
       <div className="flex flex-col min-h-screen w-full justify-start items-center">
         <div className="min-h-screen w-full flex flex-col justify-start items-center gap-3 text-white">
-          <div className="my-10 justify-center items-center flex flex-col w-full">
+        
+
+        <LampContainer>
+          <motion.h1
+            initial={{ opacity: 0.5, y: 100 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{
+              delay: 0.3,
+              duration: 0.8,
+              ease: "easeInOut",
+            }}
+            className="mt-8 bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
+          >
+            Shark-Tank<br/> Where Dreams Meet Capital
+          </motion.h1>
+        </LampContainer>
+          {/* <div className="my-10 justify-center items-center flex flex-col w-full">
             <h1 className="text-3xl sm:text-4xl md:text-6xl mb-3 uppercase">
               Sharktank
             </h1>
@@ -51,7 +69,7 @@ const About = () => {
               it&apos;s the global arena where dreams meet capital, forging a
               future shaped by groundbreaking innovations.
             </p>
-          </div>
+          </div> */}
           <Slider items={carouselItems} />
           <div className="w-full min-h-full p-1 flex flex-col justify-start items-start text-white gap-2 mt-10">
             <p className="text-4xl">Some Offers</p>
