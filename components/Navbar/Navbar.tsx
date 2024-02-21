@@ -106,7 +106,7 @@ const Navbar = () => {
     const getUserDatabase = async () => {
       if (userData) {
         const user = await authService.getUserDatabase(userData.$id);
-        console.log(user);
+        // console.log(user);
         if (user) {
           setUserDatabase(user);
         }
