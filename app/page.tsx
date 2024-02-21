@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import Footer from "@/components/Footer/Footer";
 import { ButtonsCard } from "@/components/ui/tailwindcss-buttons";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
+import { SparklesCore } from "@/components/ui/sparkles";
 
 const item = {
   initial: {
@@ -42,7 +43,7 @@ export default function Home() {
         /> */}
         <div className="flex justify-start items-center flex-col w-full">
           <div className="z-[5] flex items-center flex-col mt-20 gap-4">
-            <motion.div
+            {/* <motion.div
               className="w-full flex justify-center items-center text-4xl sm:temt-6xl md:text-8xl font-kanit overflow-hidden"
               initial="initial"
               animate="animate"
@@ -55,7 +56,32 @@ export default function Home() {
                   </motion.span>
                 );
               })}
-            </motion.div>
+            </motion.div> */}
+            <div className="h-[40rem] w-full bg-bg_dark_primary flex flex-col items-center justify-center overflow-hidden rounded-md">
+              <h1 className="md:text-7xl text-3xl lg:text-9xl font-bold text-center text-white relative z-20">
+                SharkTank
+              </h1>
+              <div className="w-[40rem] h-40 relative">
+                {/* Gradients */}
+                <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-indigo-500 to-transparent h-[2px] w-3/4 blur-sm" />
+                <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-indigo-500 to-transparent h-px w-3/4" />
+                <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-[5px] w-1/4 blur-sm" />
+                <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-px w-1/4" />
+        
+                {/* Core component */}
+                <SparklesCore
+                  background="transparent"
+                  minSize={0.4}
+                  maxSize={1}
+                  particleDensity={800}
+                  className="w-full h-full"
+                  particleColor="#FFFFFF"
+                />
+        
+                {/* Radial Gradient to prevent sharp edges */}
+                <div className="absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(350px_200px_at_top,transparent_20%,white)]"></div>
+              </div>
+            </div>
             <div className="w-3/4 leading-relaxed text-sm sm:text-base md:text-xl text-center">
               <TextGenerateEffect words={words} />
             </div>
