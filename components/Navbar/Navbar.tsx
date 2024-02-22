@@ -167,7 +167,7 @@ const Navbar = () => {
       <AnimatePresence>
         {isActive && (
           <motion.div
-            className={`w-full fixed top-0 min-h-screen bg-bg_dark_primary text-white z-10 left-0 flex justify-center items-center origin-right bg-opacity-95 backdrop-blur-sm`}
+            className={`w-full fixed top-0 min-h-screen bg-bg_dark_primary text-white left-0 flex justify-center items-center origin-right bg-opacity-95 backdrop-blur-sm z-10 `}
             variants={NavbarAnim}
             initial="initial"
             animate="animate"

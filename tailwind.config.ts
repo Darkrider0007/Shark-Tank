@@ -11,7 +11,7 @@ const config: Config = {
     extend: {
       backgroundColor: {
         bg_dark_primary: "#0c0c0c",
-        bg_dark_secondary: "#181717",
+        bg_dark_secondary: "#060606",
         bg_dark_placeholder: "#0c090a",
       },
       fontFamily: {
