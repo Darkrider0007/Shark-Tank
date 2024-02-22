@@ -7,6 +7,7 @@ import Footer from "@/components/Footer/Footer";
 import { ButtonsCard } from "@/components/ui/tailwindcss-buttons";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { SparklesCore } from "@/components/ui/sparkles";
+import { Spotlight } from "@/components/ui/Spotlight";
 
 const item = {
   initial: {
@@ -33,14 +34,12 @@ const words = `Shark Tank is a popular American television show that features as
 export default function Home() {
   return (
     <div className="flex flex-col bg-bg_dark_primary">
+       <Spotlight
+        className="-top-40 left-0 md:left-60 md:-top-20"
+        fill="white"
+      />
       <div className="overflow-hidden overscroll-none flex justify-center text-white">
-        {/* <Image
-          src="/SharktankLogo.png"
-          alt="logo"
-          width={750}
-          height={350}
-          className="fixed z-0 opacity-20"
-        /> */}
+        
         <div className="flex justify-start items-center flex-col w-full">
           <div className="z-[5] flex items-center flex-col mt-20 gap-4">
             {/* <motion.div
@@ -57,7 +56,7 @@ export default function Home() {
                 );
               })}
             </motion.div> */}
-            <div className="h-[40rem] w-full bg-bg_dark_primary flex flex-col items-center justify-center overflow-hidden rounded-md">
+            <div className="h-[40rem] w-full flex flex-col items-center justify-center overflow-hidden rounded-md">
               <h1 className="md:text-7xl text-3xl lg:text-9xl font-bold text-center text-white relative z-20">
                 SharkTank
               </h1>

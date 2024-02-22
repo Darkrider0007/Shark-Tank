@@ -2,7 +2,6 @@
 "use client";
 import authService from "@/app/appwrite/auth";
 import { AddPageLoader } from "@/components";
-import Navbar from "@/components/Navbar/Navbar";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { LuUserCircle } from "react-icons/lu";
