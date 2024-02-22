@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Carousel, OfferCard } from "@/components";
 import Navbar from "@/components/Navbar/Navbar";
@@ -7,8 +7,46 @@ import Slider from "@/components/Slider";
 import Footer from "@/components/Footer/Footer";
 import { LampContainer } from "@/components/ui/lamp";
 import { motion } from "framer-motion";
+import appwritePitches from "../appwrite/pitchesHandler";
+import { HoverEffect } from "@/components/ui/card-hover-effect";
 
 const About = () => {
+
+  const [pitches, setPitches] = useState([
+    {
+      id: "No Id",
+      Title: "No Title",
+      Description: "No Description",
+      Equity: "No Equity",
+      Ask_Amount: "No Ask Amount",
+      image:"No Image",
+      userId: "No User Id",
+    },
+  ]as any);
+
+  const fetchPitches = async () => {
+    try {
+      const data = await appwritePitches.getAllPitches();
+      console.log(data?.documents);
+      const dataArray = Array.from(data?.documents as any);
+      setPitches(
+        dataArray.map((pitch: any) => {
+          return {
+            id: pitch["$id"],
+            Title: pitch?.Title || "No Title",
+            Description: pitch?.Description || "No Description",
+            Equity: pitch?.Equity || "No Equity",
+            Ask_Amount: pitch?.Ask_Amount || "No Ask Amount",
+            image: pitch?.image || "No Image",
+            userId: pitch?.userId || "No User Id",
+          };
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const carouselItems = [
     {
       imageUrl: "/Idea_Pitching.jpg",
@@ -36,6 +74,10 @@ const About = () => {
     },
     // Add more items as needed
   ];
+
+  useEffect(() => {
+    fetchPitches();
+  }, []); // Add an empty dependency array
 
   return (
     <div className="flex justify-start items-center w-full min-h-screen flex-col bg-bg_dark_primary">
@@ -96,6 +138,22 @@ const About = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="text-white">
+        <HoverEffect items={pitches}/>
+        {/* {pitches.map((pitch: any) => {
+          return (
+            <div key={pitch.id}>
+              <h1>{pitch.Title}</h1>
+              <p>{pitch.Description}</p>
+              <p>{pitch.Equity}</p>
+              <p>{pitch.Ask_Amount}</p>
+              <p>{pitch.image}</p>
+              <p>{pitch.userId}</p>
+            </div>
+          );
+        })} */}
       </div>
       <Footer />
     </div>

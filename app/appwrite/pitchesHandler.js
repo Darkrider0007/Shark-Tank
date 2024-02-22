@@ -30,6 +30,17 @@ export class AppwritePitches {
             console.log(`Appwrite Get Pitches Database Error: ${error}`);
         }
     }
+
+    async getAllPitches(){
+        try {
+            return await this.databases.listDocuments(
+                conf.appwriteUserDatabaseID,
+                conf.appwriteCollectionId
+            );
+        } catch (error) {
+            console.log(`Appwrite Get All Pitches Error: ${error}`);
+        }
+    }
 }
 
 const appwritePitches = new AppwritePitches();
