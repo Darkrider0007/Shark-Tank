@@ -1,8 +1,8 @@
+import authService from "@/app/appwrite/auth";
 import { cn } from "@/utils/cn";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import UserDetails from "../UserDetails";
 
 
 export const HoverEffect = ({
@@ -54,9 +54,9 @@ export const HoverEffect = ({
               />
             )}
           </AnimatePresence>
-          <UserDetails userId={item.userId} />
+          
           <Card>
-            
+            <UserDetails userId={item.userId} />
             <CardTitle>{item.Title}</CardTitle>
             <CardDescription>{item.Description.split(" ").slice(0, 5).join(" ")}</CardDescription>
             <Ask_Amount>{item.Ask_Amount}</Ask_Amount>
@@ -177,4 +177,26 @@ export const Ask_Amount = ({
     );
   };
 
+
+  export const UserDetails = (userId: any) => {
+    console.log(userId);
+    const [user, setUser] = useState({} as any);
+  
+    const getUser = async (userId: string) => {
+      const user = await authService.getUserDatabase(userId);
+      setUser(user);
+    };
+  
+    useEffect(() => {
+      getUser(userId);
+    }, [userId]);
+  
+    return (
+      <div className="text-white  ">
+        <h2>{user?.name}</h2>
+        <h2>User: {user?.email}</h2>
+        <h2>{user?.role}</h2>
+      </div>
+    );
+  }
   
