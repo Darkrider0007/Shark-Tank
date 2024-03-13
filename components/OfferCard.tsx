@@ -36,7 +36,7 @@ const OfferCard = () => {
       <form className="flex flex-col justify-start items-start w-full gap-2">
         <div className="flex flex-col justify-start items-start w-full">
           <p>Amount</p>
-          <div className="flex justify-between items-center py-1 px-2 w-full bg-bg_dark_placeholder mt-1">
+          <div className="flex justify-between items-center py-1 px-2 w-full bg-bg_dark_placeholder mt-1 rounded-sm">
             <input
               type="number"
               className="w-full bg-transparent outline-none focus:outline-none"
@@ -48,7 +48,7 @@ const OfferCard = () => {
         </div>
         <div className="flex flex-col justify-start items-start w-full">
           <p>Equity</p>
-          <div className="flex justify-between items-center py-1 px-2 w-full bg-bg_dark_placeholder mt-1">
+          <div className="flex justify-between items-center py-1 px-2 w-full bg-bg_dark_placeholder mt-1 rounded-sm">
             <input
               type="number"
               className="w-full bg-transparent outline-none focus:outline-none"
@@ -61,7 +61,7 @@ const OfferCard = () => {
         <div className="flex flex-col justify-start items-start w-full">
           <p>Comment</p>
           <textarea
-            className="w-full bg-transparent outline-none focus:outline-none resize-none bg-bg_dark_placeholder p-2 h-[150px] mt-1"
+            className="w-full outline-none focus:outline-none resize-none bg-bg_dark_placeholder p-2 h-[150px] mt-1 rounded-sm"
             value="I am interested in your idea. I would like to invest in your idea. Please contact me."
             readOnly
           />
