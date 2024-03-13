@@ -47,6 +47,8 @@ NEXT_PUBLIC_EMAILJS_TEMPLATE_ID = ""
 npm run dev
 ```
 
+5. Project is running in `localhost:3000`
+
 
 # License
 
