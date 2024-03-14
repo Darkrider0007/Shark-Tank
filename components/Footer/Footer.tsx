@@ -101,7 +101,7 @@ const Footer = () => {
           />
           <button
             className="w-[120px] p-2 rounded-sm bg-zinc-700"
-            onClick={handleSubmit}
+            onClick={() => handleSubmit}
           >
             Send
           </button>
