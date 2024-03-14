@@ -4,10 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Footer from "@/components/Footer/Footer";
-import { ButtonsCard } from "@/components/ui/tailwindcss-buttons";
-import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
-import { SparklesCore } from "@/components/ui/sparkles";
-import { Spotlight } from "@/components/ui/Spotlight";
 
 const item = {
   initial: {

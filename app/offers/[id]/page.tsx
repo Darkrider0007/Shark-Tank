@@ -2,7 +2,6 @@
 import appwritePitches from "@/app/appwrite/pitchesHandler";
 import Footer from "@/components/Footer/Footer";
 import Navbar from "@/components/Navbar/Navbar";
-import { BackgroundGradient } from "@/components/ui/background-gradient";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { BsCurrencyRupee, BsPercent } from "react-icons/bs";
