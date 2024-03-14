@@ -1,11 +1,31 @@
+"use client";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import { RiCopyrightLine } from "react-icons/ri";
 import { SiGooglemaps } from "react-icons/si";
 import { FaGithub } from "react-icons/fa";
 import { MdAlternateEmail } from "react-icons/md";
+import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const Footer = () => {
+  const router = useRouter();
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const handleSubmit = (e: React.ChangeEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    toast.success("Message Sent Successfully");
+    setData({ name: "", email: "", message: "" });
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+
   return (
     <footer className="w-full min-h-[20rem] bg-zinc-900 gap-5 p-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 text-white mt-5 sm:mt-10 md:mt-20">
       <div className="flex items-center sm:items-start gap-3 flex-col p-2">
@@ -52,20 +72,39 @@ const Footer = () => {
         <hr className="w-1/4" />
         <form className="flex flex-col w-full gap-4 mt-4">
           <input
+            required
             type="text"
+            name="name"
+            onChange={handleChange}
+            value={data.name}
             placeholder="Name"
             className="w-full p-2 rounded-sm bg-zinc-700 focus:outline-none focus:border-transparent"
           />
           <input
+            required
             type="email"
+            name="email"
+            onChange={handleChange}
+            value={data.email}
             placeholder="Email"
             className="w-full p-2 rounded-sm bg-zinc-700 focus:outline-none focus:border-transparent"
           />
           <textarea
-            placeholder="Message"
+            required
+            placeholder="Give Your Message Here..."
+            name="message"
+            onChange={(e) => {
+              setData({ ...data, message: e.target.value });
+            }}
+            value={data.message}
             className="w-full p-2 rounded-sm bg-zinc-700 resize-none focus:outline-none focus:border-transparent"
-          ></textarea>
-          <button className="w-[120px] p-2 rounded-sm bg-zinc-700">Send</button>
+          />
+          <button
+            className="w-[120px] p-2 rounded-sm bg-zinc-700"
+            onClick={handleSubmit}
+          >
+            Send
+          </button>
         </form>
       </div>
       <iframe

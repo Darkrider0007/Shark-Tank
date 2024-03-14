@@ -12,7 +12,6 @@ import { HoverEffect } from "@/components/ui/card-hover-effect";
 import carouselItems from "@/constants/carouselItems";
 
 const About = () => {
-
   const [pitches, setPitches] = useState([
     {
       id: "No Id",
@@ -20,10 +19,10 @@ const About = () => {
       Description: "No Description",
       Equity: "No Equity",
       Ask_Amount: "No Ask Amount",
-      image:"No Image",
+      image: "No Image",
       userId: "No User Id",
     },
-  ]as any);
+  ] as any);
 
   const fetchPitches = async () => {
     try {
@@ -46,7 +45,7 @@ const About = () => {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   
 
@@ -58,6 +57,7 @@ const About = () => {
     <div className="flex justify-start items-center w-full min-h-screen flex-col bg-bg_dark_primary">
       <div className="flex flex-col min-h-screen w-full justify-start items-center">
         <div className="min-h-screen w-full flex flex-col justify-start items-center gap-3 text-white">
+        
         <LampContainer>
           <motion.h1
             initial={{ opacity: 0.5, y: 100 }}
@@ -114,7 +114,7 @@ const About = () => {
       </div>
 
       <div className="text-white">
-        <HoverEffect items={pitches}/>
+        <HoverEffect items={pitches} />
         {/* {pitches.map((pitch: any) => {
           return (
             <div key={pitch.id}>

@@ -1,9 +1,8 @@
 import { cn } from "@/utils/cn";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import UserDetails from "../UserDetails";
-
 
 export const HoverEffect = ({
   items,
