@@ -5,10 +5,8 @@ import { Carousel, OfferCard } from "@/components";
 import Navbar from "@/components/Navbar/Navbar";
 import Slider from "@/components/Slider";
 import Footer from "@/components/Footer/Footer";
-import { LampContainer } from "@/components/ui/lamp";
 import { motion } from "framer-motion";
 import appwritePitches from "../appwrite/pitchesHandler";
-import { HoverEffect } from "@/components/ui/card-hover-effect";
 import carouselItems from "@/constants/carouselItems";
 
 const About = () => {
@@ -55,10 +53,10 @@ const About = () => {
 
   return (
     <div className="flex justify-start items-center w-full min-h-screen flex-col bg-bg_dark_primary">
+      <Navbar />
       <div className="flex flex-col min-h-screen w-full justify-start items-center">
         <div className="min-h-screen w-full flex flex-col justify-start items-center gap-3 text-white">
         
-        <LampContainer>
           <motion.h1
             initial={{ opacity: 0.5, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -71,7 +69,6 @@ const About = () => {
           >
             Shark-Tank<br/> Where Dreams Meet Capital
           </motion.h1>
-        </LampContainer>
           {/* <div className="my-10 justify-center items-center flex flex-col w-full">
             <h1 className="text-3xl sm:text-4xl md:text-6xl mb-3 uppercase">
               Sharktank
@@ -114,7 +111,7 @@ const About = () => {
       </div>
 
       <div className="text-white">
-        <HoverEffect items={pitches} />
+        {/* <HoverEffect items={pitches} /> */}
         {/* {pitches.map((pitch: any) => {
           return (
             <div key={pitch.id}>
