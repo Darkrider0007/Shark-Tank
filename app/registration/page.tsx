@@ -13,9 +13,8 @@ import { useDispatch } from "react-redux";
 import { login as authLogin } from "../GlobalRedux/Features/authSlice";
 import { AddPageLoader, SubmitButton } from "@/components";
 
-
 const Page = () => {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
@@ -59,9 +58,11 @@ const Page = () => {
       if (userData) {
         const data = await authService.getCurrentUser();
         dispatch(authLogin(data));
-        router.push("/");
-      }else{
-        setLoading(false);
+        if (data) {
+          router.push(`/user/${data.$id}`);
+        } else {
+          router.push("/");
+        }
       }
     } catch (error: any) {
       setLoading(false);
@@ -69,15 +70,16 @@ const Page = () => {
     }
   };
 
-  if(loading){
-    return(
-      <AddPageLoader prop="Holding Up"/>
-    )    
+  if (loading) {
+    return <AddPageLoader prop="Holding Up" />;
   }
 
   return (
-    <div className="min-h-screen w-full bg-bg_dark_primary flex justify-end items-start text-[#fefefe]">
-      <div className="max-w-[450px] min-h-screen bg-bg_dark_secondary shadow-lg p-2 pb-10 pr-5">
+    <div className="min-h-screen w-full bg-bg_dark_primary flex md:flex-row justify-end md:justify-between items-start md:items-center text-[#fefefe]">
+      <div className="flex justify-center items-center h-screen w-[calc(100%_-_400px)] max-md:w-[calc(100%_-_300px)] max-sm:w-0">
+        <Image src="/signup.png" alt="signup" width={800} height={600} />
+      </div>
+      <div className="w-[400px] max-md:w-[300px] max-sm:w-full h-screen bg-bg_dark_secondary shadow-lg px-2.5">
         <div className="flex flex-col justify-between items-start w-full">
           <Image
             src="/STlogo1.png"
@@ -193,7 +195,7 @@ const Page = () => {
               </option>
             </select> */}
           {/* </div> */}
-          <SubmitButton props="Sign Up"/>
+          <SubmitButton props="Sign Up" />
         </form>
       </div>
     </div>
