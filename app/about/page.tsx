@@ -11,7 +11,6 @@ import appwritePitches from "../appwrite/pitchesHandler";
 import { HoverEffect } from "@/components/ui/card-hover-effect";
 
 const About = () => {
-
   const [pitches, setPitches] = useState([
     {
       id: "No Id",
@@ -19,10 +18,10 @@ const About = () => {
       Description: "No Description",
       Equity: "No Equity",
       Ask_Amount: "No Ask Amount",
-      image:"No Image",
+      image: "No Image",
       userId: "No User Id",
     },
-  ]as any);
+  ] as any);
 
   const fetchPitches = async () => {
     try {
@@ -45,7 +44,7 @@ const About = () => {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   const carouselItems = [
     {
@@ -83,22 +82,21 @@ const About = () => {
     <div className="flex justify-start items-center w-full min-h-screen flex-col bg-bg_dark_primary">
       <div className="flex flex-col min-h-screen w-full justify-start items-center">
         <div className="min-h-screen w-full flex flex-col justify-start items-center gap-3 text-white">
-        
-
-        <LampContainer>
-          <motion.h1
-            initial={{ opacity: 0.5, y: 100 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{
-              delay: 0.3,
-              duration: 0.8,
-              ease: "easeInOut",
-            }}
-            className="mt-8 bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
-          >
-            Shark-Tank<br/> Where Dreams Meet Capital
-          </motion.h1>
-        </LampContainer>
+          <LampContainer>
+            <motion.h1
+              initial={{ opacity: 0.5, y: 100 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{
+                delay: 0.3,
+                duration: 0.8,
+                ease: "easeInOut",
+              }}
+              className="mt-8 bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
+            >
+              Shark-Tank
+              <br /> Where Dreams Meet Capital
+            </motion.h1>
+          </LampContainer>
           {/* <div className="my-10 justify-center items-center flex flex-col w-full">
             <h1 className="text-3xl sm:text-4xl md:text-6xl mb-3 uppercase">
               Sharktank
@@ -141,7 +139,7 @@ const About = () => {
       </div>
 
       <div className="text-white">
-        <HoverEffect items={pitches}/>
+        <HoverEffect items={pitches} />
         {/* {pitches.map((pitch: any) => {
           return (
             <div key={pitch.id}>

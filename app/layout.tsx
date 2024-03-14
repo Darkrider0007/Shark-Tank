@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Poppins, Oswald, Kanit } from "next/font/google";
 import GlobalReduxProvider from "./GlobalRedux/provider";
+import ToastProvider from "@/provider/ToastProvider";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -37,7 +38,10 @@ export default function RootLayout({
       <body
         className={`${poppins.className} ${oswald.variable} ${kanit.variable} overflow-x-hidden`}
       >
-        <GlobalReduxProvider>{children}</GlobalReduxProvider>
+        <GlobalReduxProvider>
+          <ToastProvider />
+          {children}
+        </GlobalReduxProvider>
       </body>
     </html>
   );
