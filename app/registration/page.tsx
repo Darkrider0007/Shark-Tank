@@ -60,6 +60,8 @@ const Page = () => {
         const data = await authService.getCurrentUser();
         dispatch(authLogin(data));
         router.push("/");
+      }else{
+        setLoading(false);
       }
     } catch (error: any) {
       setLoading(false);

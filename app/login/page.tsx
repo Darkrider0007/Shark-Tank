@@ -6,7 +6,7 @@ import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { MdAlternateEmail } from "react-icons/md";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import authService from "../appwrite/auth";
 import { useDispatch } from "react-redux";
@@ -19,10 +19,6 @@ const Page = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter()
-  // const [values, setValues] = useState({
-  //   email: "",
-  //   password: "",
-  // });
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
 
@@ -30,11 +26,6 @@ const Page = () => {
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
-
-  // ---------------------- Function For Updating Values For Input Fields -----------------------
-  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setValues({ ...values, [e.target.name]: e.target.value });
-  // };
 
   // --------------------- Function For Doing Sign IN ---------------------
   const handleSignIn = async (data:any) => {
@@ -51,6 +42,9 @@ const Page = () => {
         const userData = await authService.getCurrentUser()
         if(userData) dispatch(authLogin(userData));
         router.push('/')
+      }
+      else{
+        setLoading(false);
       }
     } catch (error:any) {
       setLoading(false);
