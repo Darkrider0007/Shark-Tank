@@ -1,6 +1,8 @@
 import { cn } from "@/utils/cn";
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import Link from "next/link";
+import { useState, useEffect } from "react";
+import UserDetails from "../UserDetails";
 
 export const HoverEffect = ({
   items,
@@ -27,13 +29,14 @@ export const HoverEffect = ({
       )}
     >
       {items.map((item, idx) => (
-        <div
+        (<div
           key={item?.id}
           className="relative group  block p-2 h-full w-full"
           onMouseEnter={() => setHoveredIndex(idx)}
           onMouseLeave={() => setHoveredIndex(null)}
         >
           <AnimatePresence>
+
             {hoveredIndex === idx && (
               <motion.span
                 className="absolute inset-0 h-full w-full bg-neutral-200 dark:bg-slate-800/[0.8] block  rounded-3xl"
@@ -50,13 +53,15 @@ export const HoverEffect = ({
               />
             )}
           </AnimatePresence>
+          <UserDetails userId={item.userId} />
           <Card>
+            
             <CardTitle>{item.Title}</CardTitle>
             <CardDescription>{item.Description.split(" ").slice(0, 5).join(" ")}</CardDescription>
             <Ask_Amount>{item.Ask_Amount}</Ask_Amount>
             <Equity>{item.Equity}</Equity>
           </Card>
-        </div>
+        </div>)
       ))}
     </div>
   );
