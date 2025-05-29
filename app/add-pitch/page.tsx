@@ -6,6 +6,9 @@ import { LuImagePlus } from "react-icons/lu";
 import { FaArrowRightLong } from "react-icons/fa6";
 
 function Page() {
+  const [image, setImage] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+
   const [value, setValue] = useState({
     equity: "",
     amount: "",
@@ -27,8 +30,28 @@ function Page() {
           </h1>
           <div className="flex flex-col sm:flex-row gap-4 items-start w-full">
             <div className="relative w-full sm:w-1/2 border-2 border-dashed aspect-video flex items-center justify-center cursor-pointer">
-              <LuImagePlus size={50} />
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                      setImage(reader.result as string);
+                    };
+                    reader.readAsDataURL(file);
+                  }
+                }}
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+              />
+              {image ? (
+                <img src={image} alt="Uploaded" className="object-cover w-full h-full absolute inset-0 z-0" />
+              ) : (
+                <LuImagePlus size={50} className="z-0" />
+              )}
             </div>
+
             <div className="flex flex-col w-full sm:w-1/2 gap-5">
               <div className="relative w-full">
                 <input
@@ -85,8 +108,24 @@ function Page() {
               Description
             </label>
           </div>
-          <button className="relative overflow-hidden py-2 px-4 border flex items-center rounded-sm before:absolute before:content-[''] before:w-full before:h-full before:top-0 before:-left-full before:bg-white hover:before:left-0 before:transition-all before:duration-500 before:ease-in-out hover:text-black z-[1] before:-z-[1]">
-            Submit Pitch <FaArrowRightLong size={15} className="ml-2" />
+          <button
+            className="relative overflow-hidden py-2 px-4 border flex items-center rounded-sm before:absolute before:content-[''] before:w-full before:h-full before:top-0 before:-left-full before:bg-white hover:before:left-0 before:transition-all before:duration-500 before:ease-in-out hover:text-black z-[1] before:-z-[1]"
+            onClick={async () => {
+              setLoading(true);
+              // Mock API call
+              await new Promise((resolve) => setTimeout(resolve, 2000));
+              setLoading(false);
+              window.location.href = "/";
+            }}
+            disabled={loading}
+          >
+            {loading ? (
+              <span className="animate-spin mr-2 border-2 border-t-transparent border-white rounded-full w-4 h-4"></span>
+            ) : (
+              <>
+                Submit Pitch <FaArrowRightLong size={15} className="ml-2" />
+              </>
+            )}
           </button>
         </div>
       </div>

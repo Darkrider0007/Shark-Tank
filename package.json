@@ -20,6 +20,7 @@
     "encoding": "^0.1.13",
     "framer-motion": "^10.18.0",
     "next": "^13.5.4",
+    "nextjs": "file:",
     "react": "^18",
     "react-dom": "^18",
     "react-element-to-jsx-string": "^15.0.0",

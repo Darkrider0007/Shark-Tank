@@ -53,7 +53,7 @@ const PitchDetail = () => {
         <p>Pitch Description</p>
         <textarea
           className="w-full p-2 h-[150px] rounded-sm mt-1 resize-none bg-bg_dark_placeholder focus:outline-none"
-          value="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque magna nibh, scelerisque id dolor eget, laoreet imperdiet odio. Nullam cursus metus quis dolor malesuada maximus. Suspendisse potenti. Pellentesque bibendum egestas sem, non porttitor felis tempus in. In ultrices, felis et mollis placerat, felis massa pellentesque tortor"
+          value="This is a revolutionary product that aims to solve real-world problems using innovative technology. Our solution is scalable, efficient, and designed to make a positive impact."
           readOnly
         />
       </div>
